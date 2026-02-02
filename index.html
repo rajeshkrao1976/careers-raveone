@@ -3,115 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAVEONE ATS Unified Portal</title>
-    <!-- Tailwind CSS for Odoo Minimal Styling -->
+    <title>RAVEONE ATS | V1.1 Unified Portal</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         
         :root {
-            --odoo-purple: #714B67;
-            --odoo-teal: #00A09D;
-            --odoo-bg: #F0F2F5;
+            --erp-bg: #F4F5F6;
+            --erp-white: #FFFFFF;
+            --erp-border: #D1D8DD;
+            --erp-text: #1D2129;
+            --erp-text-muted: #626161;
+            --erp-blue: #1B68B3; 
+            --erp-blue-hover: #15528E;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--odoo-bg);
-            color: #333;
+            background-color: var(--erp-bg);
+            color: var(--erp-text);
+            font-size: 13px;
         }
 
-        .bg-odoo-purple { background-color: var(--odoo-purple); }
-        .text-odoo-purple { color: var(--odoo-purple); }
-        .border-odoo-purple { border-color: var(--odoo-purple); }
-        .bg-odoo-teal { background-color: var(--odoo-teal); }
-        .text-odoo-teal { color: var(--odoo-teal); }
+        /* ERPNext Style Elements */
+        .btn-erp {
+            padding: 6px 12px;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .btn-erp-primary { background-color: var(--erp-blue); color: white; border-color: var(--erp-blue); }
+        .btn-erp-primary:hover { background-color: var(--erp-blue-hover); }
+        .btn-erp-secondary { background-color: var(--erp-white); color: var(--erp-text); border-color: var(--erp-border); }
+        .btn-erp-secondary:hover { background-color: #F8F9FA; border-color: #ADB5BD; }
 
-        /* Scrollbar Hide */
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .erp-table { width: 100%; border-collapse: collapse; background: white; }
+        .erp-table th { 
+            background: #F8F9FA; 
+            color: var(--erp-text-muted); 
+            font-weight: 500; 
+            text-align: left; 
+            padding: 10px 15px; 
+            border-bottom: 1px solid var(--erp-border);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        .erp-table td { padding: 10px 15px; border-bottom: 1px solid #EDF0F2; }
+        .erp-table tr:hover { background-color: #F9FAFB; }
 
-        /* Animations */
-        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        .badge-erp {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+        }
+        .badge-active { background: #E6FFFA; color: #047481; border-color: #B2F5EA; }
+        .badge-new { background: #EBF8FF; color: #2B6CB0; border-color: #BEE3F8; }
+        .badge-warning { background: #FFFBEB; color: #B45309; border-color: #FDE68A; }
+
+        input, select, textarea {
+            border: 1px solid var(--erp-border) !important;
+            border-radius: 4px !important;
+            background: #F8F9FA;
+            padding: 6px 10px !important;
+            font-size: 13px;
+            width: 100%;
+        }
+        input:focus, select:focus, textarea:focus { border-color: var(--erp-blue) !important; outline: none; background: white; }
+
+        .fade-in { animation: fadeIn 0.2s ease-in; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        .slide-up { animation: slideUp 0.4s ease-out; }
-        @keyframes slideUp { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .form-group { display: flex; flex-direction: column; gap: 4px; }
+        .form-label { font-size: 10px; font-weight: 700; color: var(--erp-text-muted); text-transform: uppercase; }
 
-        /* Table Odoo Style */
-        .odoo-table th { font-weight: 900; color: #6B7280; text-transform: uppercase; letter-spacing: 0.025em; font-size: 0.7rem; }
-        .odoo-table td { padding: 1rem 1rem; border-bottom: 1px solid #F3F4F6; }
-        
-        input, select, textarea { border-radius: 2px !important; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="selection:bg-purple-100">
+<body class="selection:bg-blue-100">
 
-    <!-- TOP BAR -->
-    <header id="top-bar" class="h-14 bg-odoo-purple shadow-xl sticky top-0 z-[150] flex items-center justify-between px-6 text-white overflow-x-auto whitespace-nowrap scrollbar-hide hidden">
-        <div class="flex items-center gap-10 h-full">
-            <div class="flex items-center gap-2 cursor-pointer hover:scale-105 transition-transform" onclick="router.navigate('careers')">
-                <div class="w-8 h-8 bg-white/20 rounded-sm flex items-center justify-center font-black italic shadow-inner">R</div>
-                <span class="font-black tracking-tighter text-xl uppercase italic leading-none">RAVEONE</span>
+    <!-- TOP NAVIGATION -->
+    <header id="top-bar" class="h-12 bg-white border-b sticky top-0 z-[150] flex items-center justify-between px-4 hidden">
+        <div class="flex items-center gap-4 h-full">
+            <div class="flex items-center gap-2 cursor-pointer font-bold text-gray-800" onclick="router.navigate('careers')">
+                <div class="w-6 h-6 bg-gray-800 rounded flex items-center justify-center text-white text-[10px]">R</div>
+                <span class="tracking-tight text-sm uppercase">Raveone ATS</span>
             </div>
-            <nav id="admin-nav" class="flex h-full items-center">
+            <nav id="admin-nav" class="flex h-full items-center gap-1">
                 <!-- Nav items injected here -->
             </nav>
         </div>
-        <div id="user-controls" class="flex items-center gap-4">
+        <div id="user-controls" class="flex items-center gap-3">
             <!-- Auth controls injected here -->
         </div>
     </header>
 
-    <!-- PUBLIC HEADER (When logged out) -->
+    <!-- PUBLIC HEADER -->
     <header id="public-header" class="h-14 bg-white border-b flex items-center justify-between px-6">
         <div class="flex items-center gap-2 cursor-pointer" onclick="router.navigate('careers')">
-            <div class="w-8 h-8 bg-odoo-purple rounded-sm flex items-center justify-center font-black italic text-white">R</div>
-            <span class="font-black tracking-tighter text-xl uppercase italic text-odoo-purple">RAVEONE</span>
+            <div class="w-8 h-8 bg-gray-800 rounded flex items-center justify-center font-bold text-white">R</div>
+            <span class="font-bold tracking-tight text-lg">RAVEONE</span>
         </div>
-        <button onclick="router.navigate('login')" class="text-[11px] font-black uppercase bg-odoo-teal text-white px-6 py-2 rounded-sm shadow-xl hover:brightness-110 transition-all tracking-widest">
-            Recruiter Login
-        </button>
+        <button onclick="router.navigate('login')" class="btn-erp btn-erp-secondary">Recruiter Login</button>
     </header>
 
-    <!-- MAIN CONTENT AREA -->
-    <main id="app-viewport" class="p-4 md:p-10 max-w-[1500px] w-full mx-auto flex-1 min-h-[calc(100vh-8rem)]">
+    <!-- PAGE HEADER SECTION -->
+    <div id="page-context-header" class="bg-white border-b py-3 px-6 md:px-10 hidden">
+        <div class="max-w-[1500px] mx-auto flex justify-between items-center">
+            <div id="breadcrumb" class="flex items-center gap-2 text-[11px] text-gray-400 font-bold uppercase tracking-wider">
+                <span class="hover:text-blue-600 cursor-pointer">ATS</span> <i data-lucide="chevron-right" class="w-3 h-3"></i> <span id="current-page-label" class="text-gray-800">Dashboard</span>
+            </div>
+            <div id="page-actions" class="flex gap-2"></div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main id="app-viewport" class="p-4 md:p-8 max-w-[1500px] w-full mx-auto flex-1 min-h-[calc(100vh-10rem)]">
         <!-- Views injected here -->
     </main>
 
-    <!-- MODAL OVERLAY -->
-    <div id="modal-container" class="fixed inset-0 bg-black/60 z-[300] items-center justify-center p-4 backdrop-blur-sm hidden">
-        <div id="modal-content" class="bg-white w-full max-w-6xl rounded-sm shadow-2xl flex flex-col max-h-[95vh] overflow-hidden fade-in">
+    <!-- MODAL -->
+    <div id="modal-container" class="fixed inset-0 bg-black/40 z-[300] items-center justify-center p-4 hidden backdrop-blur-[1px]">
+        <div id="modal-content" class="bg-white w-full max-w-6xl rounded shadow-lg flex flex-col max-h-[95vh] overflow-hidden border">
             <!-- Modal data injected here -->
         </div>
     </div>
 
     <!-- FOOTER -->
-    <footer class="h-10 border-t bg-white flex items-center justify-between px-6 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-        <span>© 2026 Raveone Consultants ATS</span>
-        <div class="flex gap-4">
-            <span>Unified Backend Service</span>
-            <span class="text-odoo-teal animate-pulse">● System Online</span>
+    <footer class="h-10 border-t bg-white flex items-center justify-between px-6 text-[11px] text-gray-400">
+        <div class="flex gap-4 items-center">
+            <span class="font-medium">© 2026 Raveone Consultants</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+            <span class="font-bold text-green-600 uppercase tracking-tighter">V1.1 Stable</span>
         </div>
     </footer>
 
-    <!-- LOGIC -->
     <script>
-        // --- CONFIGURATION ---
+        // --- CONFIG ---
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbybXkJLimoas4lnPTmc0AA4JVVUkXZYcbBB84UQg52OiYO6Rs-p2B2XE2owJLR9Nw_w/exec";
-        const GEMINI_KEY = "AIzaSyC3C8sH8yAg-Zo0_rykVUGq38i7KjHRJgA";
-        const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`;
+        const apiKey = ""; // Provided by environment
+        const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
-        // --- GLOBAL STATE ---
         let state = {
             user: null,
             currentView: 'careers',
             loading: true,
-            data: { jobs: [], applications: [], sourced: [], interviews: [], clients: [], billing: [], users: [] },
+            data: { jobs: [], applications: [], sourced: [], interviews: [], clients: [], billing: [] },
             selectedJob: null,
-            subView: 'list' // for careers
+            subView: 'list',
+            selectedItem: null 
         };
 
         // --- API HELPERS ---
@@ -119,7 +174,7 @@
             state.loading = true;
             renderViewport();
             try {
-                const sheets = ['Jobs', 'Applications', 'Sourced', 'Interview Tracker', 'Clients', 'Dashboard and Billing', 'Users'];
+                const sheets = ['Jobs', 'Applications', 'Sourced', 'Interview Tracker', 'Clients', 'Dashboard and Billing'];
                 const results = await Promise.all(
                     sheets.map(s => fetch(`${SCRIPT_URL}?action=getSheetData&sheetName=${encodeURIComponent(s)}`).then(r => r.json()))
                 );
@@ -129,15 +184,13 @@
                     sourced: results[2] || [],
                     interviews: results[3] || [],
                     clients: results[4] || [],
-                    billing: results[5] || [],
-                    users: results[6] || []
+                    billing: results[5] || []
                 };
-            } catch (err) {
-                console.error("Fetch Error:", err);
-            } finally {
+            } catch (err) { console.error("Fetch Error:", err); } 
+            finally {
                 state.loading = false;
-                renderViewport();
                 renderTopBar();
+                renderViewport();
             }
         }
 
@@ -145,18 +198,13 @@
             try {
                 const res = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(payload) });
                 const result = await res.json();
-                if (result.success) {
-                    closeModal();
-                    await fetchData();
-                } else {
-                    alert("Backend Error: " + result.error);
-                }
-            } catch (err) {
-                alert("Network Error");
-            }
+                if (result.success) { closeModal(); await fetchData(); } 
+                else { alert("Backend Error: " + result.error); }
+            } catch (err) { alert("Network Connection Error"); }
         }
 
-        async function generateAIContent(prompt) {
+        async function generateAIJD(title, industry) {
+            const prompt = `Create a professional and detailed Job Description for the role of ${title} in the ${industry} industry. Include sections for Job Summary, Key Responsibilities, Required Skills, Education, and Benefits. Keep it structured and suitable for a recruitment portal.`;
             try {
                 const res = await fetch(GEMINI_URL, {
                     method: "POST",
@@ -164,32 +212,8 @@
                     body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
                 });
                 const json = await res.json();
-                return json.candidates?.[0]?.content?.parts?.[0]?.text || "";
+                return json.candidates?.[0]?.content?.parts?.[0]?.text || "AI generation failed.";
             } catch (err) { return "AI connection failed."; }
-        }
-
-        // --- GOOGLE JOBS SCHEMA ---
-        function injectJobSchema(job) {
-            const schema = {
-                "@context": "https://schema.org/",
-                "@type": "JobPosting",
-                "title": job.title,
-                "description": job.description,
-                "identifier": { "@type": "PropertyValue", "name": job.company, "value": job.jobid },
-                "datePosted": job.posteddate,
-                "validThrough": "2026-12-31",
-                "employmentType": job.employmenttype?.toUpperCase().replace(" ", "_") || "FULL_TIME",
-                "hiringOrganization": { "@type": "Organization", "name": job.company, "sameAs": "https://raveone.in" },
-                "jobLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": job.location, "addressRegion": "KA", "addressCountry": "IN" } },
-                "baseSalary": { "@type": "MonetaryAmount", "currency": "INR", "value": { "@type": "QuantitativeValue", "minValue": job.minsalary, "maxValue": job.maxsalary, "unitText": "MONTH" } }
-            };
-            let script = document.getElementById('job-schema');
-            if (script) script.remove();
-            script = document.createElement('script');
-            script.id = 'job-schema';
-            script.type = 'application/ld+json';
-            script.text = JSON.stringify(schema);
-            document.head.appendChild(script);
         }
 
         // --- ROUTING ---
@@ -199,114 +223,243 @@
                 state.subView = subViewName;
                 renderTopBar();
                 renderViewport();
+                window.scrollTo(0,0);
             }
         };
 
-        // --- UI RENDERING ---
+        // --- UI RENDERERS ---
         function renderTopBar() {
             const topBar = document.getElementById('top-bar');
             const publicHeader = document.getElementById('public-header');
+            const pageHeader = document.getElementById('page-context-header');
             const nav = document.getElementById('admin-nav');
             const controls = document.getElementById('user-controls');
+            const pageLabel = document.getElementById('current-page-label');
 
             if (!state.user) {
                 topBar.classList.add('hidden');
+                pageHeader.classList.add('hidden');
                 publicHeader.classList.remove('hidden');
                 return;
             }
 
             topBar.classList.remove('hidden');
+            pageHeader.classList.remove('hidden');
             publicHeader.classList.add('hidden');
+            pageLabel.innerText = state.currentView;
 
             const menu = [
-                { id: 'careers', label: 'Careers', icon: 'briefcase' },
-                { id: 'jobs', label: 'Jobs', icon: 'target' },
-                { id: 'applications', label: 'Apps', icon: 'file-text' },
-                { id: 'sourced', label: 'Sourced', icon: 'users' },
-                { id: 'interviews', label: 'Interviews', icon: 'calendar' },
-                { id: 'clients', label: 'Clients', icon: 'building-2' },
-                { id: 'billing', label: 'Billing', icon: 'indian-rupee' },
-                { id: 'marketing', label: 'Outreach', icon: 'megaphone' }
+                { id: 'jobs', label: 'Requirements' },
+                { id: 'applications', label: 'Candidates' },
+                { id: 'sourced', label: 'Sourcing' },
+                { id: 'interviews', label: 'Schedule' },
+                { id: 'clients', label: 'Clients' },
+                { id: 'billing', label: 'Accounting' },
+                { id: 'marketing', label: 'Marketing' },
+                { id: 'careers', label: 'Portal' }
             ];
 
             nav.innerHTML = menu.map(item => `
-                <button onclick="router.navigate('${item.id}')" class="h-full px-5 flex items-center gap-2 text-sm font-bold border-b-4 transition-all ${state.currentView === item.id ? 'border-odoo-teal text-odoo-teal bg-white/5' : 'border-transparent text-white/70 hover:text-white hover:bg-white/10'}">
-                    <i data-lucide="${item.icon}" class="w-4 h-4"></i> ${item.label}
+                <button onclick="router.navigate('${item.id}')" class="px-3 py-1.5 text-[11px] font-bold rounded hover:bg-gray-100 transition-colors uppercase ${state.currentView === item.id ? 'bg-gray-100 text-blue-700' : 'text-gray-500'}">
+                    ${item.label}
                 </button>
             `).join('');
 
             controls.innerHTML = `
-                <button onclick="handleLogout()" class="flex items-center gap-2 text-[10px] font-black uppercase bg-white/10 px-5 py-2 rounded-sm hover:bg-white/20 transition-all shadow-md">
-                    <i data-lucide="log-out" class="w-3 h-3"></i> LOGOUT ${state.user.name.split(' ')[0]}
-                </button>
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase">${state.user.name}</span>
+                    <button onclick="handleLogout()" class="text-gray-300 hover:text-red-500"><i data-lucide="log-out" class="w-4 h-4"></i></button>
+                </div>
             `;
             lucide.createIcons();
         }
 
         function renderViewport() {
             const viewport = document.getElementById('app-viewport');
-            
             if (state.loading) {
-                viewport.innerHTML = `
-                    <div class="h-[70vh] flex flex-col items-center justify-center gap-6 text-gray-300">
-                        <div class="w-12 h-12 border-4 border-odoo-purple border-t-transparent rounded-full animate-spin"></div>
-                        <div class="text-center space-y-1">
-                            <p class="text-sm font-black uppercase tracking-[0.3em] text-gray-400">Database Synchronization</p>
-                            <p class="text-[10px] font-bold text-gray-300 italic">Connecting to Raveone Consultants Unified Cloud...</p>
-                        </div>
-                    </div>
-                `;
+                viewport.innerHTML = `<div class="h-64 flex flex-col items-center justify-center gap-3"><div class="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div></div>`;
                 return;
             }
-
             switch(state.currentView) {
                 case 'careers': viewCareers(); break;
                 case 'login': viewLogin(); break;
                 case 'jobs': viewJobs(); break;
                 case 'applications': viewApplications(); break;
-                case 'interviews': viewInterviews(); break;
-                case 'billing': viewBilling(); break;
                 case 'sourced': viewSourced(); break;
+                case 'interviews': viewInterviews(); break;
                 case 'clients': viewClients(); break;
+                case 'billing': viewBilling(); break;
                 case 'marketing': viewMarketing(); break;
-                default: viewport.innerHTML = `<h1>View ${state.currentView} coming soon...</h1>`;
+                default: viewport.innerHTML = `<div class="p-20 text-center text-gray-300 uppercase">Coming Soon</div>`;
             }
             lucide.createIcons();
         }
 
-        // --- INDIVIDUAL VIEWS ---
+        // --- JOBS VIEW (ALL 20+ FIELDS) ---
+        function viewJobs() {
+            document.getElementById('app-viewport').innerHTML = `
+                <div class="space-y-6 fade-in">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold">Requirement Inventory (V1.1)</h2>
+                        <button onclick="handleNewJob()" class="btn-erp btn-erp-primary">Create Requirement</button>
+                    </div>
+                    <div class="bg-white border rounded overflow-x-auto shadow-sm">
+                        <table class="erp-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th><th>Position</th><th>Client</th><th>Location</th><th>Exp</th><th>Salary</th><th>Industry</th><th>Status</th><th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${state.data.jobs.map(j => `
+                                    <tr>
+                                        <td class="font-mono text-blue-600 font-bold text-[11px]">${j.jobid}</td>
+                                        <td><div class="font-bold">${j.title}</div><div class="text-[10px] text-gray-400 uppercase font-bold">${j.employmenttype} • ${j.category}</div></td>
+                                        <td class="text-xs font-bold uppercase text-gray-400">${j.company}</td>
+                                        <td class="text-xs">${j.location}</td>
+                                        <td class="text-xs font-bold text-gray-600">${j.minexperience}-${j.maxexperience} Yrs</td>
+                                        <td class="text-xs font-bold text-green-700">₹ ${j.minsalary}-${j.maxsalary}</td>
+                                        <td class="text-xs text-gray-500">${j.industry}</td>
+                                        <td><span class="badge-erp ${j.status === 'Active' ? 'badge-active' : 'badge-warning'}">${j.status}</span></td>
+                                        <td class="flex gap-2">
+                                            <button onclick="handleEditJob('${j.jobid}')" class="text-blue-600 hover:underline font-bold text-[10px] uppercase">Details/Edit</button>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- APPLICATIONS VIEW ---
+        function viewApplications() {
+            document.getElementById('app-viewport').innerHTML = `
+                <div class="space-y-6 fade-in">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold">Talent Screening Pipeline</h2>
+                    </div>
+                    <div class="bg-white border rounded overflow-x-auto">
+                        <table class="erp-table">
+                            <thead>
+                                <tr>
+                                    <th>Candidate</th><th>Position</th><th>Exp / Edu</th><th>Financials</th><th>Status</th><th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${state.data.applications.map(a => `
+                                    <tr>
+                                        <td>
+                                            <p class="font-bold">${a.candidatename}</p>
+                                            <p class="text-[10px] text-gray-400 font-bold uppercase">${a.email} • ${a.phone}</p>
+                                        </td>
+                                        <td>
+                                            <p class="font-bold text-blue-700 text-xs">${a.jobid}</p>
+                                            <p class="text-[10px] text-gray-400">${a.jobtitle}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-[11px] font-bold text-gray-600">${a.totalexperience} Total / ${a.relevantexperience} Rel</p>
+                                            <p class="text-[10px] text-gray-400 font-bold uppercase">${a.education}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-[11px] font-bold text-gray-600">C: ${a.currentctc} → E: ${a.expectedctc}</p>
+                                            <p class="text-[10px] text-orange-600 font-bold uppercase">Notice: ${a.noticeperiod} Days</p>
+                                        </td>
+                                        <td>
+                                            <span class="badge-erp badge-new">${a.status}</span>
+                                        </td>
+                                        <td class="flex gap-3">
+                                            <button onclick="viewCV('${a.resumelink}', '${a.candidatename}')" class="text-gray-400 hover:text-blue-600"><i data-lucide="eye" class="w-4 h-4"></i></button>
+                                            <a href="https://wa.me/${a.phone}" target="_blank" class="text-gray-400 hover:text-green-600"><i data-lucide="message-circle" class="w-4 h-4"></i></a>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- SOURCING VIEW ---
+        function viewSourced() {
+            document.getElementById('app-viewport').innerHTML = `
+                <div class="space-y-6 fade-in">
+                    <h2 class="text-xl font-bold">External Sourcing Registry</h2>
+                    <div class="bg-white border rounded overflow-hidden">
+                        <table class="erp-table">
+                            <thead>
+                                <tr><th>Job ID</th><th>Client</th><th>Candidate</th><th>Source Details</th><th>Actions</th></tr>
+                            </thead>
+                            <tbody>
+                                ${state.data.sourced.map(s => `
+                                    <tr>
+                                        <td class="font-mono text-blue-600 font-bold">${s.jobid}</td>
+                                        <td class="text-xs font-bold uppercase text-gray-400">${s.clientid}</td>
+                                        <td class="font-bold">${s.candidatesourced}</td>
+                                        <td class="text-xs">${s.sourcedemail} <br/> ${s.sourcedphone}</td>
+                                        <td><button class="btn-erp btn-erp-secondary text-[10px]">Convert to App</button></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- INTERVIEWS VIEW ---
+        function viewInterviews() {
+            document.getElementById('app-viewport').innerHTML = `
+                <div class="space-y-6 fade-in">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold">Interview Coordination Schedule</h2>
+                        <button class="btn-erp btn-erp-primary">Schedule New Slot</button>
+                    </div>
+                    <div class="bg-white border rounded overflow-hidden">
+                        <table class="erp-table">
+                            <thead>
+                                <tr><th>Date/Time</th><th>Candidate</th><th>Client</th><th>Mode</th><th>Status</th></tr>
+                            </thead>
+                            <tbody>
+                                ${state.data.interviews.map(i => `
+                                    <tr>
+                                        <td><p class="font-bold text-blue-700">${i.interviewdate}</p><p class="text-[10px] text-gray-400 uppercase font-bold">${i.interviewtime}</p></td>
+                                        <td class="font-bold">${i.candidatename}</td>
+                                        <td class="text-xs font-bold uppercase text-gray-400">${i.companyname}</td>
+                                        <td class="text-xs font-bold text-gray-600">${i.interviewmode}</td>
+                                        <td><span class="badge-erp badge-active">${i.nextstep}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- CAREERS VIEW (PUBLIC) ---
         function viewCareers() {
             const viewport = document.getElementById('app-viewport');
-            
             if (state.subView === 'list') {
                 const activeJobs = state.data.jobs.filter(j => String(j.status).toLowerCase() === 'active');
                 viewport.innerHTML = `
-                    <div class="max-w-7xl mx-auto space-y-16 slide-up">
-                        <div class="text-center py-16 space-y-4">
-                            <div class="inline-block bg-purple-100 px-4 py-1 rounded-full text-[10px] font-black text-odoo-purple uppercase tracking-[0.3em]">Talent Ecosystem</div>
-                            <h1 class="text-7xl font-black text-odoo-purple uppercase italic tracking-tighter leading-none mb-3">Careers @ Raveone</h1>
-                            <p class="text-gray-400 font-bold uppercase text-xs tracking-[0.5em] opacity-60">Architecting Careers. Scaling Enterprises.</p>
+                    <div class="max-w-5xl mx-auto space-y-10 fade-in py-10">
+                        <div class="text-center space-y-3">
+                            <h1 class="text-4xl font-bold text-gray-900 tracking-tight">Careers @ Raveone Consultants</h1>
+                            <p class="text-gray-500 font-medium">Explore active mandates from premium clients worldwide.</p>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                        <div class="grid grid-cols-1 gap-3">
                             ${activeJobs.map(job => `
-                                <div onclick="handleJobDetail('${job.jobid}')" class="bg-white border-l-8 border-transparent hover:border-odoo-purple p-10 rounded-sm shadow-xl transition-all cursor-pointer group flex flex-col h-full hover:-translate-y-2">
-                                    <div class="flex justify-between items-start mb-8">
-                                        <div class="flex flex-col gap-1">
-                                            <span class="text-[10px] font-black text-odoo-teal uppercase tracking-widest">${job.category || 'General'}</span>
-                                            <span class="text-[9px] font-black text-gray-300 uppercase tracking-widest">${job.jobid}</span>
-                                        </div>
-                                        <div class="bg-gray-50 p-2 rounded text-gray-300"><i data-lucide="clock" class="w-3 h-3"></i></div>
+                                <div onclick="handleJobDetail('${job.jobid}')" class="bg-white border p-6 rounded flex justify-between items-center hover:border-blue-500 cursor-pointer group transition-all">
+                                    <div>
+                                        <h3 class="text-lg font-bold text-gray-800 group-hover:text-blue-700">${job.title}</h3>
+                                        <p class="text-xs text-gray-400 font-bold uppercase tracking-tight">${job.company} • ${job.location} • ${job.industry}</p>
                                     </div>
-                                    <h3 class="text-2xl font-black text-gray-800 group-hover:text-odoo-purple mb-3 leading-none tracking-tight flex-1">${job.title}</h3>
-                                    <div class="space-y-4 mb-8 text-xs text-gray-500 font-bold uppercase tracking-tight">
-                                        <p class="flex items-center gap-2"><i data-lucide="building-2" class="w-4 h-4 text-gray-300"></i> ${job.company}</p>
-                                        <p class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-gray-300"></i> ${job.location}</p>
-                                    </div>
-                                    <div class="pt-8 border-t border-gray-100 flex justify-between items-center">
-                                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">${job.minexperience}+ Yrs Required</span>
-                                        <div class="w-8 h-8 bg-gray-50 rounded-full flex items-center justify-center group-hover:bg-odoo-purple transition-all text-gray-300 group-hover:text-white">
-                                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                                        </div>
+                                    <div class="flex items-center gap-4">
+                                        <span class="text-[11px] font-bold text-gray-400 uppercase">${job.employmenttype}</span>
+                                        <i data-lucide="chevron-right" class="w-5 h-5 text-gray-200 group-hover:text-blue-500"></i>
                                     </div>
                                 </div>
                             `).join('')}
@@ -316,52 +469,26 @@
             } else if (state.subView === 'detail' && state.selectedJob) {
                 const j = state.selectedJob;
                 viewport.innerHTML = `
-                    <div class="max-w-5xl mx-auto space-y-6 pb-20 fade-in">
-                        <button onclick="router.navigate('careers', 'list')" class="flex items-center gap-1 text-odoo-purple font-black hover:underline mb-4">
-                            <i data-lucide="chevron-left" class="w-4 h-4"></i> BACK TO OPENINGS
-                        </button>
-                        <div class="bg-white border border-gray-200 rounded-sm shadow-sm flex flex-col p-8">
-                            <div class="flex flex-col md:flex-row justify-between items-start gap-6 mb-8 border-b pb-8">
-                                <div class="space-y-2">
-                                    <div class="flex gap-2">
-                                        <span class="bg-purple-50 text-odoo-purple px-2 py-1 rounded text-[10px] font-black tracking-widest uppercase">${j.jobid}</span>
-                                        <span class="bg-teal-50 text-odoo-teal px-2 py-1 rounded text-[10px] font-black tracking-widest uppercase">${j.category || 'Standard'}</span>
-                                    </div>
-                                    <h1 class="text-4xl font-black text-gray-800 leading-tight">${j.title}</h1>
-                                    <p class="text-gray-500 font-bold flex flex-wrap items-center gap-6">
-                                        <span class="flex items-center gap-1"><i data-lucide="building-2" class="w-4 h-4"></i> ${j.company}</span>
-                                        <span class="flex items-center gap-1"><i data-lucide="map-pin" class="w-4 h-4"></i> ${j.location}</span>
-                                        <span class="text-[10px] text-gray-400 font-medium uppercase">POSTED: ${j.posteddate}</span>
-                                    </p>
-                                </div>
-                                <button onclick="router.navigate('careers', 'apply')" class="bg-odoo-teal text-white px-10 py-4 font-black rounded-sm shadow-xl hover:brightness-110 uppercase text-sm tracking-widest">APPLY FOR THIS ROLE</button>
+                    <div class="max-w-4xl mx-auto space-y-6 fade-in py-10">
+                        <button onclick="router.navigate('careers', 'list')" class="btn-erp btn-erp-secondary text-xs"><i data-lucide="arrow-left" class="w-3 h-3"></i> Listings</button>
+                        <div class="bg-white border rounded p-10 space-y-8">
+                            <div class="flex justify-between items-start border-b pb-8">
+                                <div><h1 class="text-4xl font-bold text-gray-900">${j.title}</h1><p class="text-gray-500 font-bold uppercase text-xs mt-2">${j.company} | ${j.location}</p></div>
+                                <button onclick="router.navigate('careers', 'apply')" class="btn-erp btn-erp-primary py-4 px-8">Submit Candidature</button>
                             </div>
-                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                                <div class="lg:col-span-2 space-y-10">
-                                    <section>
-                                        <h4 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2"><i data-lucide="info" class="w-4 h-4"></i> Description</h4>
-                                        <div class="text-gray-700 leading-relaxed whitespace-pre-wrap text-sm">${j.description}</div>
-                                    </section>
-                                    <section>
-                                        <h4 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2"><i data-lucide="tag" class="w-4 h-4"></i> Key Requirements</h4>
-                                        <div class="text-gray-700 leading-relaxed whitespace-pre-wrap text-sm">${j.requirements}</div>
-                                    </section>
-                                    ${j.benefits ? `<section>
-                                        <h4 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2"><i data-lucide="indian-rupee" class="w-4 h-4"></i> Employee Benefits</h4>
-                                        <div class="text-gray-700 leading-relaxed whitespace-pre-wrap text-sm">${j.benefits}</div>
-                                    </section>` : ''}
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                                <div class="md:col-span-2 space-y-8 text-gray-600 leading-relaxed text-sm">
+                                    <section><h4 class="text-gray-900 font-bold text-xs uppercase mb-4 tracking-widest border-l-4 border-blue-600 pl-3">Role Overview</h4><div class="whitespace-pre-wrap">${j.description}</div></section>
+                                    <section><h4 class="text-gray-900 font-bold text-xs uppercase mb-4 tracking-widest border-l-4 border-blue-600 pl-3">Technical Requirements</h4><div class="whitespace-pre-wrap">${j.requirements}</div></section>
+                                    <section><h4 class="text-gray-900 font-bold text-xs uppercase mb-4 tracking-widest border-l-4 border-blue-600 pl-3">Benefits</h4><div class="whitespace-pre-wrap">${j.benefits}</div></section>
                                 </div>
-                                <div class="space-y-6">
-                                    <div class="bg-gray-50 p-6 space-y-5 rounded-sm">
-                                        <h3 class="font-bold text-odoo-purple text-[10px] uppercase tracking-widest border-b border-gray-200 pb-2">Role Intelligence</h3>
-                                        <div><p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Industry</p><p class="font-bold text-sm">${j.industry || "General"}</p></div>
-                                        <div><p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Bracket</p><p class="font-bold text-sm">${j.minexperience} - ${j.maxexperience} Years</p></div>
-                                        <div><p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Budget</p><p class="font-bold text-sm text-odoo-teal">₹ ${j.minsalary} - ${j.maxsalary}</p></div>
-                                        <div><p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Academic</p><p class="font-bold text-sm">${j.education}</p></div>
-                                        <div><p class="text-[10px] font-bold text-gray-400 uppercase mb-1">Positions</p><p class="font-bold text-sm">${j.numberofpositions} Opening(s)</p></div>
-                                        <div class="pt-4 border-t border-gray-200">
-                                            <a href="${j.joburl}" target="_blank" class="text-[10px] font-black text-odoo-purple uppercase underline flex items-center gap-1 hover:text-odoo-teal"><i data-lucide="globe" class="w-3 h-3"></i> Listing Link</a>
-                                        </div>
+                                <div class="space-y-4">
+                                    <div class="bg-gray-50 border p-5 rounded space-y-4">
+                                        <h5 class="font-bold text-[10px] uppercase text-gray-400 tracking-widest border-b pb-2">Mandate Intelligence</h5>
+                                        <div><p class="text-[9px] font-bold text-gray-400 uppercase">Employment Type</p><p class="font-bold text-sm">${j.employmenttype}</p></div>
+                                        <div><p class="text-[9px] font-bold text-gray-400 uppercase">Min Education</p><p class="font-bold text-sm">${j.education}</p></div>
+                                        <div><p class="text-[9px] font-bold text-gray-400 uppercase">Experience</p><p class="font-bold text-sm">${j.minexperience} - ${j.maxexperience} Yrs</p></div>
+                                        <div><p class="text-[9px] font-bold text-gray-400 uppercase">Key Skills</p><p class="font-bold text-sm text-blue-700">${j.skills}</p></div>
                                     </div>
                                 </div>
                             </div>
@@ -369,41 +496,34 @@
                     </div>
                 `;
             } else if (state.subView === 'apply' && state.selectedJob) {
-                const j = state.selectedJob;
                 viewport.innerHTML = `
-                    <div class="max-w-4xl mx-auto pb-20 slide-up">
-                        <button onclick="router.navigate('careers', 'detail')" class="flex items-center gap-1 text-odoo-purple font-black mb-4 uppercase text-xs">
-                            <i data-lucide="chevron-left" class="w-4 h-4"></i> RETURN TO JD
-                        </button>
-                        <div class="bg-white border border-gray-200 rounded-sm shadow-sm flex flex-col p-8">
-                            <h3 class="font-black text-odoo-purple text-xs uppercase tracking-[0.2em] mb-8 border-b pb-4">Talent Submission: ${j.title}</h3>
-                            <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" onsubmit="handleApplySubmit(event)">
-                                <div><label class="text-[10px] font-black text-gray-400 uppercase mb-1 block">Full Name</label><input required name="candidatename" placeholder="Candidate Name" class="w-full border p-2 text-sm outline-none focus:border-odoo-purple" /></div>
-                                <div><label class="text-[10px] font-black text-gray-400 uppercase mb-1 block">Email</label><input required name="email" type="email" placeholder="email@address.com" class="w-full border p-2 text-sm outline-none" /></div>
-                                <div><label class="text-[10px] font-black text-gray-400 uppercase mb-1 block">Contact</label><input required name="phone" placeholder="+91" class="w-full border p-2 text-sm outline-none" /></div>
-                                <div><label class="text-[10px] font-black text-gray-400 uppercase mb-1 block">Qualification</label><input required name="education" placeholder="Highest Degree" class="w-full border p-2 text-sm outline-none" /></div>
-                                <div><label class="text-[10px] font-black text-gray-400 uppercase mb-1 block">Total Exp</label><input required name="totalexperience" placeholder="Yrs" class="w-full border p-2 text-sm outline-none" /></div>
-                                <div><label class="text-[10px] font-black text-gray-400 uppercase mb-1 block">Rel Exp</label><input required name="relevantexperience" placeholder="Yrs" class="w-full border p-2 text-sm outline-none" /></div>
-                                <div><label class="text-[10px] font-black text-gray-400 uppercase mb-1 block">Current CTC</label><input required name="currentctc" placeholder="LPA" class="w-full border p-2 text-sm outline-none" /></div>
-                                <div><label class="text-[10px] font-black text-gray-400 uppercase mb-1 block">Exp CTC</label><input required name="expectedctc" placeholder="LPA" class="w-full border p-2 text-sm outline-none" /></div>
-                                <div><label class="text-[10px] font-black text-gray-400 uppercase mb-1 block">Notice</label><input required name="noticeperiod" placeholder="Days" class="w-full border p-2 text-sm outline-none" /></div>
-                                <div><label class="text-[10px] font-black text-gray-400 uppercase mb-1 block">Location</label><input required name="location" placeholder="City" class="w-full border p-2 text-sm outline-none" /></div>
-                                <div class="lg:col-span-2"><label class="text-[10px] font-black text-gray-400 uppercase mb-1 block">Resume URL</label><input required name="resumelink" placeholder="Drive Link" class="w-full border p-2 text-sm outline-none" /></div>
-                                
-                                <div class="col-span-full py-6 border-y border-dashed border-gray-200">
-                                    <div class="flex flex-col items-center justify-center p-12 bg-gray-50 border-2 border-dashed border-gray-300 rounded-sm group hover:bg-white transition-all">
-                                        <i data-lucide="upload" class="text-odoo-purple mb-3 w-10 h-10 group-hover:scale-110 transition-transform"></i>
-                                        <p class="text-xs font-black text-odoo-purple uppercase mb-1 tracking-widest">Upload Resume</p>
-                                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tighter mb-4">Native PDF preferred</p>
-                                        <input type="file" id="file-cv" class="hidden">
-                                        <label for="file-cv" class="px-8 py-3 bg-odoo-purple text-white text-[11px] font-black rounded-sm cursor-pointer shadow-2xl hover:brightness-110 tracking-widest">SELECT FILE</label>
+                    <div class="max-w-4xl mx-auto py-10 fade-in space-y-6">
+                        <button onclick="router.navigate('careers', 'detail')" class="btn-erp btn-erp-secondary text-xs">Return to JD</button>
+                        <div class="bg-white border p-8 rounded space-y-8">
+                            <h3 class="text-xl font-bold border-b pb-4">Application Form: ${state.selectedJob.title}</h3>
+                            <form id="apply-form" class="space-y-8" onsubmit="handleApplySubmit(event)">
+                                <div class="form-grid">
+                                    <div class="form-group"><label class="form-label">Full Name</label><input required name="candidatename" /></div>
+                                    <div class="form-group"><label class="form-label">Email Address</label><input required type="email" name="email" /></div>
+                                    <div class="form-group"><label class="form-label">Phone Number</label><input required name="phone" /></div>
+                                    <div class="form-group"><label class="form-label">Highest Education</label><input required name="education" /></div>
+                                    <div class="form-group"><label class="form-label">Total Exp (Yrs)</label><input required name="totalexperience" /></div>
+                                    <div class="form-group"><label class="form-label">Rel Exp (Yrs)</label><input required name="relevantexperience" /></div>
+                                    <div class="form-group"><label class="form-label">Current CTC (LPA)</label><input required name="currentctc" /></div>
+                                    <div class="form-group"><label class="form-label">Expected CTC (LPA)</label><input required name="expectedctc" /></div>
+                                    <div class="form-group"><label class="form-label">Notice Period (Days)</label><input required name="noticeperiod" /></div>
+                                    <div class="form-group"><label class="form-label">Current Location</label><input required name="location" /></div>
+                                </div>
+                                <div class="space-y-4 p-6 bg-gray-50 border-2 border-dashed rounded-sm text-center">
+                                    <div class="flex flex-col items-center">
+                                        <i data-lucide="upload-cloud" class="w-10 h-10 text-gray-300 mb-2"></i>
+                                        <label class="form-label block mb-2">Resume Upload / Drive Link</label>
+                                        <input required name="resumelink" placeholder="Paste Google Drive / Dropbox link here" />
+                                        <p class="text-[10px] text-gray-400 mt-2">Ensure link permissions are set to 'Anyone with the link'</p>
                                     </div>
                                 </div>
-
-                                <div class="col-span-full pt-6">
-                                    <button type="submit" class="w-full bg-odoo-purple text-white py-5 font-black rounded-sm shadow-2xl uppercase text-sm tracking-[0.3em] hover:brightness-110 transition-all flex items-center justify-center gap-3">
-                                        <i data-lucide="send" class="w-5 h-5"></i> FINAL SUBMISSION
-                                    </button>
+                                <div class="pt-4">
+                                    <button type="submit" class="btn-erp btn-erp-primary w-full py-4 text-sm font-bold uppercase tracking-[0.2em]">Finalize & Submit Application</button>
                                 </div>
                             </form>
                         </div>
@@ -412,492 +532,144 @@
             }
         }
 
-        function viewLogin() {
-            document.getElementById('app-viewport').innerHTML = `
-                <div class="min-h-[70vh] flex items-center justify-center">
-                    <div class="w-full max-w-sm bg-white p-10 rounded-sm shadow-2xl border-t-8 border-odoo-purple fade-in">
-                        <div class="text-center mb-10">
-                            <h1 class="text-3xl font-black text-odoo-purple italic tracking-tighter">RECRUITER LOGIN</h1>
-                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-2">Access Secure ATS Database</p>
+        // --- JOB MODAL (CREATE/EDIT WITH ALL 20 FIELDS) ---
+        function openJobModal() {
+            const j = state.selectedItem;
+            const content = document.getElementById('modal-content');
+            content.innerHTML = `
+                <div class="p-4 border-b flex justify-between items-center bg-gray-50">
+                    <span class="text-xs font-bold uppercase tracking-widest">Mandate Definition: ${j.jobid || 'NEW'}</span>
+                    <button onclick="closeModal()"><i data-lucide="x" class="w-5 h-5"></i></button>
+                </div>
+                <div class="p-6 overflow-y-auto space-y-8">
+                    <div class="bg-blue-50/50 p-4 border border-blue-100 rounded-sm">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-[11px] font-bold text-blue-700 uppercase tracking-widest">Primary Identity</h4>
+                            <button onclick="handleAIGenFull()" class="btn-erp btn-erp-primary text-[10px] px-3"><i data-lucide="sparkles" class="w-3 h-3"></i> AI Generate JD</button>
                         </div>
-                        <form onsubmit="handleLoginSubmit(event)" class="space-y-6">
-                            <div>
-                                <label class="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2">Email Identity</label>
-                                <div class="relative">
-                                    <i data-lucide="mail" class="absolute left-3 top-2.5 text-gray-300 w-4 h-4"></i>
-                                    <input required type="email" id="login-email" placeholder="rajesh@raveone.in" class="w-full border-b-2 border-gray-100 pl-10 pr-4 py-2 text-sm outline-none focus:border-odoo-purple transition-colors" />
+                        <div class="form-grid">
+                            <div class="form-group"><label class="form-label">Job ID</label><input id="mod-jobid" value="${j.jobid||''}" /></div>
+                            <div class="form-group"><label class="form-label">Role Title</label><input id="mod-title" value="${j.title||''}" /></div>
+                            <div class="form-group"><label class="form-label">Client Name</label><input id="mod-company" value="${j.company||''}" /></div>
+                            <div class="form-group"><label class="form-label">Industry</label><input id="mod-industry" value="${j.industry||''}" /></div>
+                            <div class="form-group"><label class="form-label">Location</label><input id="mod-location" value="${j.location||''}" /></div>
+                            <div class="form-group"><label class="form-label">Category</label><input id="mod-category" value="${j.category||''}" /></div>
+                            <div class="form-group"><label class="form-label">Employment Type</label><select id="mod-employmenttype"><option ${j.employmenttype==='Full Time'?'selected':''}>Full Time</option><option ${j.employmenttype==='Contract'?'selected':''}>Contract</option><option ${j.employmenttype==='Freelance'?'selected':''}>Freelance</option></select></div>
+                            <div class="form-group"><label class="form-label">Status</label><select id="mod-status"><option ${j.status==='Active'?'selected':''}>Active</option><option ${j.status==='Inactive'?'selected':''}>Inactive</option></select></div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div class="form-group"><label class="form-label">Job Description</label><textarea id="mod-description" class="h-48">${j.description||''}</textarea></div>
+                            <div class="form-group"><label class="form-label">Requirements</label><textarea id="mod-requirements" class="h-32">${j.requirements||''}</textarea></div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 p-4 border rounded-sm">
+                                <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3 border-b pb-1">Mandate Specifications</h4>
+                                <div class="form-grid">
+                                    <div class="form-group"><label class="form-label">Min Exp</label><input id="mod-minexperience" value="${j.minexperience||''}" /></div>
+                                    <div class="form-group"><label class="form-label">Max Exp</label><input id="mod-maxexperience" value="${j.maxexperience||''}" /></div>
+                                    <div class="form-group"><label class="form-label">Min Salary (LPA)</label><input id="mod-minsalary" value="${j.minsalary||''}" /></div>
+                                    <div class="form-group"><label class="form-label">Max Salary (LPA)</label><input id="mod-maxsalary" value="${j.maxsalary||''}" /></div>
+                                    <div class="form-group"><label class="form-label">Education</label><input id="mod-education" value="${j.education||''}" /></div>
+                                    <div class="form-group"><label class="form-label">Positions</label><input id="mod-numberofpositions" value="${j.numberofpositions||''}" /></div>
                                 </div>
                             </div>
-                            <div>
-                                <label class="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2">Access Token</label>
-                                <div class="relative">
-                                    <i data-lucide="lock" class="absolute left-3 top-2.5 text-gray-300 w-4 h-4"></i>
-                                    <input required type="password" id="login-pass" placeholder="••••••••" class="w-full border-b-2 border-gray-100 pl-10 pr-4 py-2 text-sm outline-none focus:border-odoo-purple transition-colors" />
-                                </div>
-                            </div>
-                            <button class="w-full bg-odoo-purple text-white py-4 font-black text-sm rounded-sm shadow-xl hover:brightness-110 uppercase tracking-widest">Sign In</button>
-                            <button type="button" onclick="router.navigate('careers')" class="w-full text-gray-400 text-xs font-bold hover:text-odoo-purple mt-4">Return to Public Portal</button>
-                        </form>
-                    </div>
-                </div>
-            `;
-        }
-
-        function viewJobs() {
-            const viewport = document.getElementById('app-viewport');
-            viewport.innerHTML = `
-                <div class="space-y-8 slide-up">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h2 class="text-2xl font-black text-odoo-purple uppercase tracking-tight leading-none">Job Inventory</h2>
-                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">Manage all active requirements</p>
-                        </div>
-                        <button onclick="handleNewJob()" class="bg-odoo-purple text-white px-6 py-3 text-xs font-black flex items-center gap-2 rounded-sm shadow-xl uppercase tracking-widest"><i data-lucide="plus" class="w-4 h-4"></i> New Requirement</button>
-                    </div>
-                    <div class="bg-white border border-gray-200 rounded-sm shadow-sm overflow-x-auto">
-                        <table class="w-full text-left odoo-table">
-                            <thead>
-                                <tr class="bg-gray-50">
-                                    <th class="px-4 py-3">ID</th>
-                                    <th class="px-4 py-3">Position</th>
-                                    <th class="px-4 py-3">Client</th>
-                                    <th class="px-4 py-3">Location</th>
-                                    <th class="px-4 py-3">Status</th>
-                                    <th class="px-4 py-3 text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-50">
-                                ${state.data.jobs.map(j => `
-                                    <tr>
-                                        <td class="font-black text-gray-400">${j.jobid}</td>
-                                        <td class="font-black text-gray-800">${j.title}</td>
-                                        <td class="text-gray-500 font-bold uppercase">${j.company}</td>
-                                        <td class="text-gray-500 font-medium">${j.location}</td>
-                                        <td><span class="px-2 py-1 rounded-sm font-black text-[9px] uppercase ${j.status==='Active' ? 'bg-green-100 text-green-700':'bg-gray-100 text-gray-400'}">${j.status}</span></td>
-                                        <td class="flex justify-center gap-4 py-4">
-                                            <button onclick="handleEditJob('${j.jobid}')" class="text-odoo-teal font-black uppercase text-[11px]">Edit</button>
-                                            <button onclick="shareJob('${j.jobid}', 'WA')" class="text-green-600"><i data-lucide="message-square" class="w-4 h-4"></i></button>
-                                            <button onclick="shareJob('${j.jobid}', 'Email')" class="text-purple-600"><i data-lucide="mail" class="w-4 h-4"></i></button>
-                                        </td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            `;
-        }
-
-        function viewApplications() {
-            document.getElementById('app-viewport').innerHTML = `
-                <div class="space-y-8 slide-up">
-                    <div>
-                        <h2 class="text-2xl font-black text-odoo-purple uppercase tracking-tight leading-none">Applications</h2>
-                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">Talent screening and pipeline tracking</p>
-                    </div>
-                    <div class="bg-white border border-gray-200 rounded-sm shadow-sm overflow-x-auto">
-                        <table class="w-full text-left odoo-table">
-                            <thead>
-                                <tr class="bg-gray-50">
-                                    <th class="px-4 py-3">ID</th>
-                                    <th class="px-4 py-3">Role</th>
-                                    <th class="px-4 py-3">Candidate</th>
-                                    <th class="px-4 py-3">Exp / Education</th>
-                                    <th class="px-4 py-3">CTC</th>
-                                    <th class="px-4 py-3">Status</th>
-                                    <th class="px-4 py-3">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-50">
-                                ${state.data.applications.map(a => `
-                                    <tr>
-                                        <td class="font-black text-gray-400">${a.appid}</td>
-                                        <td class="font-black text-odoo-purple uppercase text-[11px] leading-tight">${a.jobid}<br/><span class="text-[9px] text-gray-400 font-bold">${a.jobtitle}</span></td>
-                                        <td class="font-black text-gray-800">${a.candidatename}</td>
-                                        <td><div class="text-[10px] font-black text-gray-400 uppercase">${a.education}</div><div class="font-bold text-gray-600 text-[11px]">${a.totalexperience} / ${a.relevantexperience} Yrs</div></td>
-                                        <td class="text-[11px] font-bold text-gray-500">${a.currentctc} → ${a.expectedctc}</td>
-                                        <td>
-                                            <select onchange="updateAppStatus('${a.appid}', this.value)" class="text-[10px] font-black uppercase outline-none bg-transparent">
-                                                <option ${a.status==='New'?'selected':''}>New</option>
-                                                <option ${a.status==='Screening'?'selected':''}>Screening</option>
-                                                <option ${a.status==='Interview'?'selected':''}>Interview</option>
-                                                <option ${a.status==='Joined'?'selected':''}>Joined</option>
-                                                <option ${a.status==='Rejected'?'selected':''}>Rejected</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <div class="flex gap-2">
-                                                <button onclick="viewCV('${a.resumelink}', '${a.candidatename}')" class="p-2 bg-blue-50 text-blue-600 rounded-sm hover:bg-blue-600 hover:text-white"><i data-lucide="eye" class="w-4 h-4"></i></button>
-                                                <button onclick="copyAppPitch('${a.appid}')" class="p-2 bg-purple-50 text-purple-600 rounded-sm hover:bg-purple-600 hover:text-white"><i data-lucide="mail" class="w-4 h-4"></i></button>
-                                                <a href="https://wa.me/${a.phone}" target="_blank" class="p-2 bg-green-50 text-green-600 rounded-sm hover:bg-green-600 hover:text-white"><i data-lucide="message-square" class="w-4 h-4"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            `;
-        }
-
-        function viewInterviews() {
-            document.getElementById('app-viewport').innerHTML = `
-                <div class="space-y-8 slide-up">
-                    <div class="flex justify-between items-center">
-                        <h2 class="text-2xl font-black text-odoo-purple uppercase tracking-tight">Interviews</h2>
-                        <button onclick="handleNewInterview()" class="bg-odoo-purple text-white px-6 py-3 text-xs font-black flex items-center gap-2 rounded-sm shadow-xl uppercase"><i data-lucide="calendar" class="w-4 h-4"></i> New Slot</button>
-                    </div>
-                    <div class="bg-white border border-gray-200 rounded-sm shadow-sm">
-                        <table class="w-full text-left odoo-table">
-                            <thead><tr class="bg-gray-50"><th class="px-4 py-3">ID</th><th class="px-4 py-3">Candidate</th><th class="px-4 py-3">Client</th><th class="px-4 py-3">Mode / Time</th><th class="px-4 py-3">Step</th><th class="px-4 py-3">Action</th></tr></thead>
-                            <tbody class="divide-y">
-                                ${state.data.interviews.map(i => {
-                                    const app = state.data.applications.find(a => a.candidatename === i.candidatename) || {};
-                                    const cli = state.data.clients.find(c => c.companyname === i.companyname) || {};
-                                    return `
-                                        <tr>
-                                            <td class="font-black text-gray-400">${i.interviewid}</td>
-                                            <td class="font-black uppercase">${i.candidatename}</td>
-                                            <td class="font-bold text-gray-500 uppercase text-[11px]">${i.companyname}</td>
-                                            <td><div class="font-black text-odoo-purple text-[10px] uppercase">${i.interviewmode}</div><div class="text-[11px] font-bold text-gray-400">${i.interviewdate} @ ${i.interviewtime}</div></td>
-                                            <td><span class="text-[10px] font-black px-2 py-1 bg-purple-50 text-purple-700 rounded-sm uppercase">${i.nextstep}</span></td>
-                                            <td><button onclick="handleInterviewCoord('${i.interviewid}')" class="text-odoo-teal font-black uppercase text-[11px] hover:underline">Coordinate</button></td>
-                                        </tr>
-                                    `;
-                                }).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            `;
-        }
-
-        function viewClients() {
-            document.getElementById('app-viewport').innerHTML = `
-                <div class="space-y-8 slide-up">
-                    <h2 class="text-2xl font-black text-odoo-purple uppercase tracking-tight">Client Hub</h2>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div class="lg:col-span-2">
-                            <div class="bg-white border border-gray-200 rounded-sm shadow-sm overflow-hidden">
-                                <table class="w-full text-left odoo-table">
-                                    <thead><tr class="bg-gray-50"><th class="px-4 py-3">ID</th><th class="px-4 py-3">Account</th><th class="px-4 py-3">Contact</th><th class="px-4 py-3">Status</th><th class="px-4 py-3">Actions</th></tr></thead>
-                                    <tbody class="divide-y">
-                                        ${state.data.clients.map(c => `
-                                            <tr>
-                                                <td class="font-black text-gray-400">${c.clientid}</td>
-                                                <td class="font-black text-odoo-purple text-[12px] uppercase">${c.companyname}</td>
-                                                <td class="text-gray-500 font-bold text-[11px]">${c.contactname}<br/>${c.email}</td>
-                                                <td><span class="px-2 py-1 rounded-sm font-black text-[9px] uppercase ${c.clientstatus==='Hot' ? 'bg-orange-100 text-orange-700':'bg-gray-100 text-gray-400'}">${c.clientstatus}</span></td>
-                                                <td><button onclick="handleClientDrill('${c.clientid}')" class="text-odoo-teal font-black uppercase text-[11px]">Drill Down</button></td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div id="client-drill-viewport">
-                            <div class="bg-white border border-gray-200 rounded-sm shadow-sm p-8 text-center text-gray-300 italic text-xs h-[500px] flex flex-col items-center justify-center space-y-4">
-                                <i data-lucide="search" class="w-10 h-10 opacity-20 text-gray-400"></i>
-                                <p>Select an account to view job-wise<br/>candidate stages</p>
-                            </div>
+                            <div class="form-group"><label class="form-label">Key Skills (Comma separated)</label><input id="mod-skills" value="${j.skills||''}" /></div>
+                            <div class="form-group"><label class="form-label">Benefits</label><textarea id="mod-benefits" class="h-24">${j.benefits||''}</textarea></div>
+                            <div class="form-group"><label class="form-label">Job URL (External)</label><input id="mod-joburl" value="${j.joburl||''}" /></div>
                         </div>
                     </div>
                 </div>
-            `;
-        }
-
-        function viewBilling() {
-            const booked = state.data.billing.reduce((s,b)=>s+(parseInt(b.billingamount)||0),0);
-            const due = state.data.billing.reduce((s,b)=>s+(parseInt(b.balancedue)||0),0);
-            document.getElementById('app-viewport').innerHTML = `
-                <div class="space-y-8 slide-up">
-                    <h2 class="text-2xl font-black text-odoo-purple uppercase tracking-tight">Financials</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="bg-white border border-gray-200 p-6 rounded-sm shadow-sm border-t-4 border-green-500">
-                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Booked Revenue</p>
-                            <p class="text-3xl font-black text-green-600">₹ ${booked.toLocaleString()}</p>
-                        </div>
-                        <div class="bg-white border border-gray-200 p-6 rounded-sm shadow-sm border-t-4 border-orange-500">
-                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Outstanding</p>
-                            <p class="text-3xl font-black text-orange-600">₹ ${due.toLocaleString()}</p>
-                        </div>
-                        <div class="bg-white border border-gray-200 p-6 rounded-sm shadow-sm border-t-4 border-odoo-purple">
-                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Total Placements</p>
-                            <p class="text-3xl font-black text-odoo-purple">${state.data.billing.filter(b=>b.clientname).length}</p>
-                        </div>
-                    </div>
-                    <div class="bg-white border rounded-sm overflow-hidden">
-                        <table class="w-full text-left odoo-table">
-                            <thead><tr class="bg-gray-50"><th class="px-4 py-3">Client</th><th class="px-4 py-3">Candidate</th><th class="px-4 py-3">Join Date</th><th class="px-4 py-3">Bill Amt</th><th class="px-4 py-3">Status</th></tr></thead>
-                            <tbody class="divide-y">
-                                ${state.data.billing.filter(b=>b.clientname).map(b => `
-                                    <tr class="text-[11px]">
-                                        <td class="font-black uppercase text-odoo-purple leading-tight">${b.clientname}</td>
-                                        <td class="font-bold text-gray-800">${b.candidatename}</td>
-                                        <td class="text-gray-500 font-black">${b.joiningdate}</td>
-                                        <td class="font-black text-green-700">₹ ${parseInt(b.billingamount).toLocaleString()}</td>
-                                        <td><span class="px-2 py-1 font-black text-[9px] uppercase rounded-sm ${b.paymentstatus==='Payment Received' ? 'bg-green-100 text-green-700':'bg-yellow-100 text-yellow-700'}">${b.paymentstatus}</span></td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="p-4 border-t flex justify-end gap-2 bg-gray-50">
+                    <button onclick="closeModal()" class="btn-erp btn-erp-secondary">Discard</button>
+                    <button onclick="saveJobModal()" class="btn-erp btn-erp-primary">Sync with Backend</button>
                 </div>
             `;
+            document.getElementById('modal-container').classList.remove('hidden');
+            document.getElementById('modal-container').classList.add('flex');
+            lucide.createIcons();
         }
 
-        function viewSourced() {
-            document.getElementById('app-viewport').innerHTML = `
-                <div class="space-y-8 slide-up">
-                    <h2 class="text-2xl font-black text-odoo-purple uppercase tracking-tight">Sourcing</h2>
-                    <div class="bg-white border border-gray-200 rounded-sm overflow-hidden shadow-sm">
-                        <table class="w-full text-left odoo-table">
-                            <thead><tr class="bg-gray-50"><th class="px-4 py-3">ID</th><th class="px-4 py-3">Account</th><th class="px-4 py-3">Position</th><th class="px-4 py-3">Candidate</th><th class="px-4 py-3">Actions</th></tr></thead>
-                            <tbody class="divide-y">
-                                ${state.data.sourced.map(s => `
-                                    <tr>
-                                        <td class="font-black text-gray-400">${s.jobid}</td>
-                                        <td class="font-black text-odoo-purple uppercase text-[10px]">${s.clientid}</td>
-                                        <td class="font-bold text-gray-600 text-[11px] uppercase">${s.positiontitle}</td>
-                                        <td class="font-black text-gray-800">${s.candidatesourced}<br/><span class="text-gray-400 text-[9px]">${s.sourcedemail}</span></td>
-                                        <td class="flex gap-2 py-4">
-                                            <a href="mailto:${s.sourcedemail}" class="p-2 bg-purple-50 text-purple-600 rounded-sm shadow-sm hover:scale-110 transition-transform"><i data-lucide="mail" class="w-4 h-4"></i></a>
-                                            <a href="https://wa.me/${s.sourcedphone}" target="_blank" class="p-2 bg-green-50 text-green-600 rounded-sm shadow-sm hover:scale-110 transition-transform"><i data-lucide="message-square" class="w-4 h-4"></i></a>
-                                        </td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            `;
+        async function handleAIGenFull() {
+            const title = document.getElementById('mod-title').value;
+            const industry = document.getElementById('mod-industry').value;
+            if (!title) return alert("Please specify Role Title first.");
+            document.getElementById('mod-description').value = "Generating Mandate Profile with Gemini AI...";
+            const res = await generateAIJD(title, industry);
+            document.getElementById('mod-description').value = res;
         }
 
-        function viewMarketing() {
-            document.getElementById('app-viewport').innerHTML = `
-                <div class="space-y-8 slide-up">
-                    <h2 class="text-2xl font-black text-odoo-purple uppercase tracking-tight">Marketing Center</h2>
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <div class="bg-white border border-gray-200 rounded-sm p-8 shadow-sm">
-                            <h3 class="font-black text-odoo-purple text-xs uppercase tracking-widest mb-6">Outreach Automator</h3>
-                            <div class="space-y-6">
-                                <div class="space-y-2">
-                                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Select Role</label>
-                                    <select id="mkt-role" class="w-full border-2 border-gray-100 p-3 text-sm font-bold outline-none focus:border-odoo-purple bg-white transition-all">
-                                        <option value="">Choose Position Role...</option>
-                                        ${state.data.jobs.map(j => `<option value="${j.jobid}">${j.company} - ${j.title}</option>`).join('')}
-                                    </select>
-                                </div>
-                                <div class="flex flex-col gap-3">
-                                    <button onclick="generateMkt('WA')" class="w-full bg-odoo-purple text-white py-4 font-black rounded-sm shadow-xl uppercase tracking-[0.2em] text-xs">Generate WhatsApp Pitch</button>
-                                    <button onclick="generateMkt('LinkedIn')" class="w-full bg-odoo-teal text-white py-4 font-black rounded-sm shadow-xl uppercase tracking-[0.2em] text-xs">Generate LinkedIn Post</button>
-                                </div>
-                                <div class="p-5 bg-yellow-50 border-l-4 border-yellow-400 rounded-sm">
-                                    <p class="text-[10px] font-bold text-yellow-800 leading-relaxed italic">Marketing content is drafted using Gemini 1.5 Flash. Please review guidelines before broadcasting.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="mkt-preview" class="bg-white border border-gray-200 rounded-sm p-8 flex flex-col items-center justify-center text-center text-gray-300">
-                            <i data-lucide="pie-chart" class="w-16 h-16 opacity-10 mb-4"></i>
-                            <p class="text-xs font-bold uppercase tracking-widest leading-loose">Automated campaigns<br/>preview area</p>
-                        </div>
-                    </div>
-                </div>
-            `;
+        function saveJobModal() {
+            const job = {
+                jobid: document.getElementById('mod-jobid').value,
+                title: document.getElementById('mod-title').value,
+                company: document.getElementById('mod-company').value,
+                industry: document.getElementById('mod-industry').value,
+                location: document.getElementById('mod-location').value,
+                category: document.getElementById('mod-category').value,
+                employmenttype: document.getElementById('mod-employmenttype').value,
+                status: document.getElementById('mod-status').value,
+                description: document.getElementById('mod-description').value,
+                requirements: document.getElementById('mod-requirements').value,
+                minexperience: document.getElementById('mod-minexperience').value,
+                maxexperience: document.getElementById('mod-maxexperience').value,
+                minsalary: document.getElementById('mod-minsalary').value,
+                maxsalary: document.getElementById('mod-maxsalary').value,
+                education: document.getElementById('mod-education').value,
+                numberofpositions: document.getElementById('mod-numberofpositions').value,
+                skills: document.getElementById('mod-skills').value,
+                benefits: document.getElementById('mod-benefits').value,
+                joburl: document.getElementById('mod-joburl').value,
+                posteddate: new Date().toISOString().split('T')[0]
+            };
+            postAction({ action: 'updateJob', job });
         }
 
-        // --- HANDLERS ---
-        function handleLoginSubmit(e) {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const pass = document.getElementById('login-pass').value;
-            if (email === 'rajesh@raveone.in' && pass === 'P1@st15s!') {
-                state.user = { name: 'Rajesh K Rao', role: 'Admin' };
-                router.navigate('jobs');
-            } else alert("Access Denied");
-        }
-
-        function handleLogout() {
-            state.user = null;
-            router.navigate('careers');
-        }
-
-        function handleJobDetail(jobid) {
-            const job = state.data.jobs.find(j => j.jobid === jobid);
-            state.selectedJob = job;
-            injectJobSchema(job);
-            router.navigate('careers', 'detail');
-        }
-
-        function handleApplySubmit(e) {
-            e.preventDefault();
-            const formData = new FormData(e.target);
+        function handleApplySubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
             const application = {};
-            formData.forEach((val, key) => application[key] = val);
-            
+            formData.forEach((v, k) => application[k] = v);
             application.jobid = state.selectedJob.jobid;
             application.jobtitle = state.selectedJob.title;
             application.status = 'New';
             application.applieddate = new Date().toISOString().split('T')[0];
             application.appid = `APP-${Date.now().toString().slice(-6)}`;
-
             postAction({ action: 'addApplication', application });
         }
 
-        function handleNewJob() {
-            state.selectedItem = { jobid: `J${Math.floor(Math.random()*900)+100}`, status: 'Active', posteddate: new Date().toISOString().split('T')[0] };
-            openJobModal();
+        // --- HANDLERS ---
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            if (document.getElementById('login-email').value === 'rajesh@raveone.in' && document.getElementById('login-pass').value === 'P1@st15s!') {
+                state.user = { name: 'Rajesh K Rao' };
+                router.navigate('jobs');
+            } else alert("Invalid Recruiter Credentials");
         }
 
-        function handleEditJob(jobid) {
-            state.selectedItem = state.data.jobs.find(j => j.jobid === jobid);
-            openJobModal();
-        }
+        function handleLogout() { state.user = null; router.navigate('careers'); }
+        function handleJobDetail(id) { state.selectedJob = state.data.jobs.find(j => j.jobid === id); router.navigate('careers', 'detail'); }
+        function handleNewJob() { state.selectedItem = {}; openJobModal(); }
+        function handleEditJob(id) { state.selectedItem = state.data.jobs.find(j => j.jobid === id); openJobModal(); }
+        function closeModal() { document.getElementById('modal-container').classList.add('hidden'); }
 
-        function openJobModal() {
-            const j = state.selectedItem;
-            const container = document.getElementById('modal-container');
-            const content = document.getElementById('modal-content');
-
-            content.innerHTML = `
-                <div class="p-4 border-b bg-gray-50 flex justify-between items-center"><h3 class="font-black text-odoo-purple uppercase text-sm tracking-widest">Update Profile: ${j.jobid}</h3><button onclick="closeModal()"><i data-lucide="x" class="w-6 h-6 text-gray-400"></i></button></div>
-                <div class="p-8 overflow-y-auto grid grid-cols-1 md:grid-cols-3 gap-10">
-                    <div class="md:col-span-2 space-y-6">
-                        <div class="grid grid-cols-2 gap-6">
-                            <div><label class="text-[9px] font-black uppercase text-gray-400 block mb-1">Title</label><input id="mod-title" value="${j.title||''}" class="w-full border p-2 text-sm outline-none focus:border-odoo-purple"></div>
-                            <div><label class="text-[9px] font-black uppercase text-gray-400 block mb-1">Client</label><input id="mod-company" value="${j.company||''}" class="w-full border p-2 text-sm outline-none"></div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between items-center mb-1"><label class="text-[9px] font-black text-gray-400 uppercase tracking-widest">JD Description</label><button onclick="handleAIGen()" class="text-[8px] font-black text-odoo-teal underline">AI AUTO-GENERATE</button></div>
-                            <textarea id="mod-desc" class="w-full border p-3 text-xs h-40 outline-none leading-relaxed">${j.description||''}</textarea>
-                        </div>
-                        <div class="grid grid-cols-2 gap-6">
-                            <div><label class="text-[9px] font-black text-gray-400 uppercase mb-1 block">Requirements</label><textarea id="mod-req" class="w-full border p-2 text-xs h-32 outline-none">${j.requirements||''}</textarea></div>
-                            <div><label class="text-[9px] font-black text-gray-400 uppercase mb-1 block">Benefits</label><textarea id="mod-ben" class="w-full border p-2 text-xs h-32 outline-none">${j.benefits||''}</textarea></div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 p-6 space-y-5 rounded-sm border border-gray-200 h-fit">
-                        <h4 class="text-[10px] font-black text-gray-400 uppercase border-b pb-2 tracking-tighter">Metadata</h4>
-                        <div><label class="text-[9px] font-black text-gray-500 uppercase">Location</label><input id="mod-loc" value="${j.location||''}" class="w-full border p-1 text-xs outline-none"></div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div><label class="text-[9px] font-black text-gray-500 uppercase">Min Exp</label><input id="mod-min-exp" value="${j.minexperience||''}" class="w-full border p-1 text-xs"></div>
-                            <div><label class="text-[9px] font-black text-gray-500 uppercase">Max Exp</label><input id="mod-max-exp" value="${j.maxexperience||''}" class="w-full border p-1 text-xs"></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div><label class="text-[9px] font-black text-gray-500 uppercase">Min Sal</label><input id="mod-min-sal" value="${j.minsalary||''}" class="w-full border p-1 text-xs"></div>
-                            <div><label class="text-[9px] font-black text-gray-500 uppercase">Max Sal</label><input id="mod-max-sal" value="${j.maxsalary||''}" class="w-full border p-1 text-xs"></div>
-                        </div>
-                        <div><label class="text-[9px] font-black text-gray-500 uppercase">Industry</label><input id="mod-ind" value="${j.industry||''}" class="w-full border p-1 text-xs"></div>
-                        <div><label class="text-[9px] font-black text-gray-500 uppercase">Education</label><input id="mod-edu" value="${j.education||''}" class="w-full border p-1 text-xs"></div>
-                        <div><label class="text-[9px] font-black text-gray-500 uppercase">Status</label><select id="mod-stat" class="w-full border p-1 text-xs"><option ${j.status==='Active'?'selected':''}>Active</option><option ${j.status==='Inactive'?'selected':''}>Inactive</option></select></div>
-                    </div>
-                </div>
-                <div class="p-6 border-t bg-gray-50 flex justify-end gap-3"><button onclick="closeModal()" class="px-6 py-2 border rounded-sm text-xs font-black uppercase text-gray-500 hover:bg-white">Cancel</button><button onclick="saveJobModal()" class="px-6 py-2 bg-odoo-purple text-white rounded-sm text-xs font-black shadow-xl uppercase tracking-widest">Save Record</button></div>
-            `;
-            container.classList.remove('hidden');
-            container.classList.add('flex');
-            lucide.createIcons();
-        }
-
-        async function handleAIGen() {
-            const title = document.getElementById('mod-title').value;
-            if (!title) return alert("Enter role title first");
-            document.getElementById('mod-desc').value = "Generating intelligent description...";
-            const content = await generateAIContent(`Create professional recruitment job description for ${title} at Raveone Consultants`);
-            document.getElementById('mod-desc').value = content;
-        }
-
-        function saveJobModal() {
-            const job = {
-                ...state.selectedItem,
-                title: document.getElementById('mod-title').value,
-                company: document.getElementById('mod-company').value,
-                description: document.getElementById('mod-desc').value,
-                requirements: document.getElementById('mod-req').value,
-                benefits: document.getElementById('mod-ben').value,
-                location: document.getElementById('mod-loc').value,
-                minexperience: document.getElementById('mod-min-exp').value,
-                maxexperience: document.getElementById('mod-max-exp').value,
-                minsalary: document.getElementById('mod-min-sal').value,
-                maxsalary: document.getElementById('mod-max-sal').value,
-                industry: document.getElementById('mod-ind').value,
-                education: document.getElementById('mod-edu').value,
-                status: document.getElementById('mod-stat').value,
-            };
-            postAction({ action: 'updateJob', job });
-        }
-
-        function handleInterviewCoord(id) {
-            const i = state.data.interviews.find(it => it.interviewid === id);
-            const app = state.data.applications.find(a => a.candidatename === i.candidatename) || {};
-            const cli = state.data.clients.find(c => c.companyname === i.companyname) || {};
-            
-            const container = document.getElementById('modal-container');
-            const content = document.getElementById('modal-content');
-            content.classList.remove('max-w-6xl');
-            content.classList.add('max-w-lg');
-
-            content.innerHTML = `
-                <div class="p-4 border-b bg-gray-50 flex justify-between items-center text-xs font-black text-odoo-purple uppercase">Coordination Logic: ${id} <button onclick="closeModal()"><i data-lucide="x" class="w-5 h-5"></i></button></div>
-                <div class="p-6 space-y-6">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-blue-50 p-4 rounded-sm border border-blue-100">
-                            <p class="text-[9px] font-black text-gray-400 uppercase mb-1">Candidate</p>
-                            <p class="text-sm font-black text-gray-800">${i.candidatename}</p>
-                            <p class="text-[11px] text-blue-700 font-bold">${app.phone || 'N/A'}</p>
-                        </div>
-                        <div class="bg-purple-50 p-4 rounded-sm border border-purple-100">
-                            <p class="text-[9px] font-black text-gray-400 uppercase mb-1">Client</p>
-                            <p class="text-sm font-black text-gray-800">${i.companyname}</p>
-                            <p class="text-[11px] text-purple-700 font-bold">${cli.phone || 'N/A'}</p>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-3">
-                        <select id="mod-i-mode" class="border p-2 text-xs outline-none bg-white"><option ${i.interviewmode==='VC'?'selected':''}>VC</option><option ${i.interviewmode==='F2F'?'selected':''}>F2F</option></select>
-                        <input id="mod-i-date" type="date" value="${i.interviewdate}" class="border p-2 text-xs">
-                        <input id="mod-i-time" type="time" value="${i.interviewtime}" class="border p-2 text-xs">
-                    </div>
-                    <textarea id="mod-i-feedback" placeholder="Meeting link or venue details..." class="w-full border p-3 text-xs h-24 outline-none leading-relaxed">${i.interviewfeedback||''}</textarea>
-                </div>
-                <div class="p-4 border-t bg-gray-50 flex justify-end gap-3"><button onclick="closeModal()" class="px-5 py-2 border rounded-sm text-xs font-black">Cancel</button><button onclick="saveInterviewSlot('${id}')" class="px-5 py-2 bg-odoo-purple text-white rounded-sm text-xs font-black shadow-xl uppercase">Save Slot</button></div>
-            `;
-            container.classList.remove('hidden');
-            container.classList.add('flex');
-            lucide.createIcons();
-        }
-
-        function saveInterviewSlot(id) {
-            const update = {
-                interview_id: id,
-                interviewmode: document.getElementById('mod-i-mode').value,
-                interviewdate: document.getElementById('mod-i-date').value,
-                interviewtime: document.getElementById('mod-i-time').value,
-                interviewfeedback: document.getElementById('mod-i-feedback').value,
-                next_step: 'Scheduled'
-            };
-            postAction({ action: 'updateInterviewStep', ...update });
-        }
-
-        function handleClientDrill(clientid) {
-            const client = state.data.clients.find(c => c.clientid === clientid);
+        // Reuse client drill down from context
+        function handleClientDrill(id) {
+            const client = state.data.clients.find(c => c.clientid === id);
             const jobs = state.data.jobs.filter(j => j.company === client.companyname);
-            const drillPort = document.getElementById('client-drill-viewport');
-
-            drillPort.innerHTML = `
-                <div class="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-6 slide-up h-full">
-                    <div class="border-b pb-4 flex justify-between items-center">
-                        <h4 class="font-black text-odoo-purple uppercase text-sm tracking-tight">${client.companyname}</h4>
-                        <button onclick="viewClients()" class="text-gray-300"><i data-lucide="x" class="w-4 h-4"></i></button>
-                    </div>
-                    <div class="space-y-4 max-h-[500px] overflow-y-auto pr-2 scrollbar-hide">
+            const viewport = document.getElementById('client-drill-viewport');
+            viewport.innerHTML = `
+                <div class="w-full space-y-6 fade-in">
+                    <div class="border-b pb-3 flex justify-between items-center"><h4 class="font-bold text-blue-700 uppercase">${client.companyname} Mandates</h4><button onclick="viewClients()"><i data-lucide="x" class="w-4 h-4 text-gray-300"></i></button></div>
+                    <div class="space-y-2 overflow-y-auto max-h-[500px]">
                         ${jobs.map(j => `
-                            <div class="p-4 bg-gray-50 border-l-4 border-odoo-purple rounded-sm shadow-sm space-y-3">
-                                <p class="text-xs font-black text-gray-800 uppercase tracking-tight leading-tight">${j.title}</p>
-                                <div class="flex gap-2">
-                                    <span class="text-[8px] font-black bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded-sm uppercase">${state.data.applications.filter(a=>a.jobid===j.jobid).length} Apps</span>
-                                    <span class="text-[8px] font-black bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded-sm uppercase">${state.data.interviews.filter(i=>i.companyname===client.companyname && i.positiontitle===j.title).length} Ints</span>
-                                    <span class="text-[8px] font-black bg-green-100 text-green-700 px-1.5 py-0.5 rounded-sm uppercase">${state.data.billing.filter(b=>b.clientname === client.companyname).length} Jnd</span>
+                            <div class="p-4 bg-gray-50 border-l-2 border-blue-600 rounded">
+                                <p class="text-xs font-bold text-gray-800">${j.title}</p>
+                                <div class="flex gap-4 mt-2">
+                                    <span class="text-[9px] font-bold text-gray-400 uppercase">${state.data.applications.filter(a=>a.jobid===j.jobid).length} Apps</span>
+                                    <span class="text-[9px] font-bold text-gray-400 uppercase">${state.data.interviews.filter(i=>i.companyname===client.companyname && i.positiontitle===j.title).length} Ints</span>
                                 </div>
                             </div>
                         `).join('')}
@@ -907,47 +679,37 @@
             lucide.createIcons();
         }
 
+        async function generateMkt(mode) {
+            const roleId = document.getElementById('mkt-role').value;
+            if (!roleId) return alert("Select a role");
+            const job = state.data.jobs.find(j => j.jobid === roleId);
+            const preview = document.getElementById('mkt-preview');
+            preview.innerHTML = `<span class="animate-pulse text-gray-400 font-bold text-xs uppercase">AI Architecting Content...</span>`;
+            const content = await generateAIJD(job.title, job.industry);
+            preview.innerHTML = `<textarea class="w-full h-full bg-transparent border-none text-xs text-gray-600 p-2 leading-relaxed" readonly>${content}</textarea><button onclick="navigator.clipboard.writeText(\`${content}\`); alert('Copied to clipboard');" class="btn-erp btn-erp-secondary text-[10px] absolute bottom-4 right-4">Copy Pitch</button>`;
+        }
+
         function viewCV(link, name) {
             const container = document.getElementById('modal-container');
             const content = document.getElementById('modal-content');
-            content.classList.remove('max-w-lg');
-            content.classList.add('max-w-6xl');
-            content.innerHTML = `
-                <div class="p-4 border-b flex justify-between items-center bg-gray-50 text-xs font-black text-odoo-purple uppercase">In-Portal CV Viewer: ${name} <button onclick="closeModal()"><i data-lucide="x" class="w-6 h-6 text-gray-400"></i></button></div>
-                <iframe src="${link}" class="flex-1 w-full border-none bg-gray-200" style="height: calc(95vh - 4rem)"></iframe>
-            `;
-            container.classList.remove('hidden');
-            container.classList.add('flex');
-            lucide.createIcons();
+            content.innerHTML = `<div class="p-3 border-b flex justify-between items-center bg-gray-50"><span class="text-xs font-bold text-gray-600 uppercase">CV Vault: ${name}</span><button onclick="closeModal()"><i data-lucide="x" class="w-5 h-5"></i></button></div><iframe src="${link}" class="flex-1 w-full border-none h-[85vh]"></iframe>`;
+            container.classList.remove('hidden'); container.classList.add('flex'); lucide.createIcons();
         }
 
         function copyAppPitch(id) {
             const a = state.data.applications.find(ap => ap.appid === id);
-            const pitch = `Hi Team, pitching candidate ${a.candidatename} for ${a.jobtitle}. Exp: ${a.totalexperience} yrs. Education: ${a.education}. Notice: ${a.noticeperiod}. Link: ${a.resumelink}`;
-            navigator.clipboard.writeText(pitch);
-            alert("Candidate pitch copied for client email!");
+            const pitch = `Pitching Candidate: ${a.candidatename}\nPosition: ${a.jobtitle}\nExp: ${a.totalexperience} Yrs\nRel Exp: ${a.relevantexperience} Yrs\nCTC: ${a.currentctc} LPA\nNotice: ${a.noticeperiod} Days\nCV: ${a.resumelink}`;
+            navigator.clipboard.writeText(pitch); alert("Pitch template copied!");
         }
 
         function shareJob(id, mode) {
             const j = state.data.jobs.find(job => job.jobid === id);
-            const msg = `Hiring: ${j.title} @ ${j.company} | ${j.location} | Exp: ${j.minexperience}+. Apply: https://raveone.in/careers?jobid=${j.jobid}`;
+            const msg = `Mandate: ${j.title} @ ${j.company}\nLoc: ${j.location}\nExp: ${j.minexperience}+ Yrs\nLink: https://raveone.in/careers?jobid=${id}`;
             if (mode === 'WA') window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`);
-            else { navigator.clipboard.writeText(msg); alert("Job info copied!"); }
+            else { navigator.clipboard.writeText(msg); alert("Job capsule copied!"); }
         }
 
-        function closeModal() {
-            const container = document.getElementById('modal-container');
-            container.classList.add('hidden');
-            container.classList.remove('flex');
-            document.getElementById('modal-content').classList.remove('max-w-lg');
-            document.getElementById('modal-content').classList.add('max-w-6xl');
-        }
-
-        // --- INIT ---
-        window.onload = () => {
-            fetchData();
-        };
-
+        window.onload = fetchData;
     </script>
 </body>
 </html>
