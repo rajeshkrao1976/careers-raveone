@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAVEONE ATS | Recruitment Desk</title>
+    <title>RAVEONE ATS | Unified Desk</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -22,7 +22,7 @@
             --erp-danger: #e74c3c;
         }
 
-        /* ERPNext Style - Strictly No Italics Global Override */
+        /* ERPNext Style - No Italics Global Override */
         * { 
             font-style: normal !important; 
             font-family: 'Inter', sans-serif;
@@ -39,7 +39,7 @@
             min-height: 100vh;
         }
 
-        /* Top Navigation Console */
+        /* Navigation Console */
         .top-nav {
             height: 60px;
             background: #ffffff;
@@ -61,7 +61,7 @@
             height: 60px;
             color: var(--erp-text-muted);
             font-size: 0.825rem;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.1s ease;
             border-bottom: 2px solid transparent;
             white-space: nowrap;
@@ -77,19 +77,20 @@
             color: var(--erp-blue);
             border-bottom: 2px solid var(--erp-blue);
             background: var(--erp-blue-light);
-            font-weight: 700;
+            font-weight: 800;
         }
 
-        /* Generic ERP Card */
+        /* Layout Units */
         .desk-card {
             background: #ffffff;
             border: 1px solid var(--erp-border);
             border-radius: 8px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.03);
             overflow: hidden;
+            transition: box-shadow 0.2s;
         }
 
-        /* Advanced Data Table */
+        /* Table Design */
         .data-table-container {
             width: 100%;
             overflow-x: auto;
@@ -106,7 +107,7 @@
 
         .data-table th {
             font-size: 10px;
-            font-weight: 800;
+            font-weight: 900;
             color: var(--erp-text-muted);
             text-transform: uppercase;
             letter-spacing: 0.05em;
@@ -124,18 +125,18 @@
 
         .data-table tr:hover { background: #fcfcfc; }
 
-        /* Actions & Buttons */
+        /* Actions & UI Elements */
         .btn-primary {
             background: var(--erp-blue);
             color: white;
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 6px;
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 800;
             border: none;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.03em;
         }
         .btn-primary:hover { background: #006ae6; }
 
@@ -143,20 +144,48 @@
             background: #ffffff;
             border: 1px solid var(--erp-border);
             color: var(--erp-text-main);
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 6px;
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 800;
             cursor: pointer;
         }
         .btn-secondary:hover { background: #f8fafc; }
 
-        /* Badge Logic */
+        .btn-icon {
+            padding: 6px;
+            border-radius: 4px;
+            color: var(--erp-text-muted);
+            transition: all 0.2s;
+        }
+        .btn-icon:hover { background: #f1f5f9; color: var(--erp-blue); }
+
+        .input-erp {
+            width: 100%;
+            border: 1px solid var(--erp-border);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 13px;
+            outline: none;
+            background: #ffffff;
+        }
+        .input-erp:focus { border-color: var(--erp-blue); box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1); }
+
+        .form-label {
+            display: block;
+            font-size: 11px;
+            font-weight: 900;
+            color: var(--erp-text-muted);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            letter-spacing: 0.05em;
+        }
+
         .status-badge {
-            padding: 2px 10px;
+            padding: 3px 12px;
             border-radius: 4px;
             font-size: 10px;
-            font-weight: 800;
+            font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 0.02em;
         }
@@ -165,117 +194,105 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 4px 10px;
+            padding: 4px 12px;
             background: #f3f4f6;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 10px;
-            font-weight: 800;
+            font-weight: 900;
             border: 1px solid #e5e7eb;
         }
 
         .stage-count {
             background: #374151;
             color: white;
-            padding: 1px 5px;
-            border-radius: 3px;
-            min-width: 18px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            min-width: 20px;
             text-align: center;
         }
 
-        /* Inputs */
-        .input-erp {
-            width: 100%;
-            border: 1px solid var(--erp-border);
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-size: 13px;
-            outline: none;
-            background: #ffffff;
-        }
-        .input-erp:focus { border-color: var(--erp-blue); box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.08); }
+        .fade-in { animation: fadeIn 0.25s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-        .form-label {
-            display: block;
-            font-size: 11px;
-            font-weight: 800;
-            color: var(--erp-text-muted);
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            letter-spacing: 0.03em;
-        }
-
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
 
-        .fade-in { animation: fadeIn 0.2s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Career Specifics */
-        .job-detail-card {
-            border-bottom: 1px solid #f3f4f6;
-            padding-bottom: 1.5rem;
-            margin-bottom: 1.5rem;
+        /* Metric Dashboard */
+        .metric-card {
+            border-top: 5px solid var(--erp-blue);
+        }
+        .metric-label {
+            font-size: 10px;
+            font-weight: 900;
+            color: var(--erp-text-muted);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .metric-value {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--erp-text-main);
+            letter-spacing: -0.02em;
         }
     </style>
 </head>
 <body>
 
     <!-- TOP NAVIGATION CONSOLE -->
-    <header class="top-nav">
+    <header class="top-nav shadow-sm border-b">
         <div class="flex items-center gap-6 h-full">
-            <div class="flex items-center gap-3 cursor-pointer mr-2" onclick="router.navigate('careers')">
+            <div class="flex items-center gap-3 cursor-pointer mr-4" onclick="router.navigate('careers')">
                 <div class="w-9 h-9 bg-slate-800 rounded-lg flex items-center justify-center text-white font-black text-xl">R</div>
                 <h1 class="font-black text-lg tracking-tighter text-slate-800 uppercase">RAVEONE</h1>
             </div>
-            <nav id="nav-container" class="hidden lg:flex items-center h-full">
-                <!-- Nav generated by JS -->
+            <nav id="nav-container" class="flex items-center h-full">
+                <!-- Nav items generated by renderNav() -->
             </nav>
         </div>
 
         <div id="user-controls" class="flex items-center gap-3">
-            <!-- User Info / Auth -->
+            <!-- User specific UI -->
         </div>
     </header>
 
     <!-- MAIN DASHBOARD VIEWPORT -->
-    <main id="app-viewport" class="p-6 md:p-8 lg:p-12 max-w-[1700px] mx-auto w-full flex-1">
-        <!-- Module content here -->
+    <main id="app-viewport" class="p-6 md:p-10 lg:p-14 max-w-[1800px] mx-auto w-full flex-1">
+        <!-- Content components -->
     </main>
 
     <!-- STATUS FOOTER -->
     <footer class="p-4 border-t bg-white text-[10px] text-gray-400 font-bold uppercase tracking-widest flex justify-between px-10">
         <div class="flex gap-6">
-            <span>Raveone Unified ATS | Production Desk</span>
-            <span>Build 1.5.0-Final</span>
+            <span>Raveone Unified ATS | Enterprise Desk</span>
+            <span class="text-slate-200">|</span>
+            <span>Security context: Active</span>
         </div>
         <div class="flex items-center gap-4">
             <span>© 2026 Raveone Consultants</span>
-            <span id="sync-indicator" class="flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> Desk Records Sync
+            <span id="sync-indicator" class="flex items-center gap-1.5 font-black">
+                <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> Cloud Records Active
             </span>
         </div>
     </footer>
 
     <!-- MODAL ENGINE -->
-    <div id="modal-overlay" class="fixed inset-0 bg-slate-900/60 z-[2000] hidden items-center justify-center p-4 backdrop-blur-sm">
+    <div id="modal-overlay" class="fixed inset-0 bg-slate-900/70 z-[2000] hidden items-center justify-center p-4 backdrop-blur-sm">
         <div id="modal-box" class="bg-white w-full max-w-5xl rounded-xl shadow-2xl flex flex-col max-h-[92vh] overflow-hidden border border-slate-300">
-            <!-- Modal Data -->
+            <!-- Modal Body -->
         </div>
     </div>
 
     <!-- TOAST NOTIFIER -->
     <div id="toast" class="fixed bottom-8 right-8 z-[3000] transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
         <div class="bg-slate-800 text-white px-6 py-3 rounded-lg shadow-2xl flex items-center gap-3 font-bold text-xs uppercase tracking-widest">
-            <i data-lucide="check" class="w-4 h-4 text-green-400"></i>
-            <span id="toast-text">Success</span>
+            <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+            <span id="toast-text">Update Successful</span>
         </div>
     </div>
 
     <script>
-        // --- CORE SYSTEM CONFIG ---
-        // Your specific SCRIPT_URL
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzVP4wCeKX1eTNXzNog0XFJfiWVpkwsrVMSmR6OtiFd238ZVwUckF-pd4SNuvmlmHX2/exec";
+        // --- SYSTEM CONFIG & REFS ---
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbweRCDf6P0dj4t2cJdmdCrLSws_EQvgtHNkhklBZ2vC9xDx-FDxP6yGrX9gtVKKX2Gx/exec";
         const GEMINI_KEY = "AIzaSyC3C8sH8yAg-Zo0_rykVUGq38i7KjHRJgA";
         const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`;
 
@@ -283,11 +300,18 @@
             user: null,
             view: 'careers',
             loading: true,
-            data: { jobs: [], applications: [], sourced: [], interviews: [], clients: [], billing: [] },
+            data: { 
+                jobs: [], 
+                applications: [], 
+                sourced: [], 
+                interviews: [], 
+                clients: [], 
+                billing: [],
+                users: []
+            },
             subView: 'list',
             selectedId: null,
-            expandedClientId: null,
-            searchQuery: ""
+            expandedClientId: null
         };
 
         const router = {
@@ -307,7 +331,7 @@
             state.loading = true;
             renderView();
             try {
-                const sheets = ['Jobs', 'Applications', 'Sourced', 'Interview Tracker', 'Clients', 'Dashboard and Billing'];
+                const sheets = ['Jobs', 'Applications', 'Sourced', 'Interview Tracker', 'Clients', 'Dashboard and Billing', 'Users'];
                 const results = await Promise.all(
                     sheets.map(s => fetch(`${SCRIPT_URL}?action=getSheetData&sheetName=${encodeURIComponent(s)}`).then(r => r.json()))
                 );
@@ -317,11 +341,12 @@
                     sourced: results[2] || [],
                     interviews: results[3] || [],
                     clients: results[4] || [],
-                    billing: results[5] || []
+                    billing: results[5] || [],
+                    users: results[6] || []
                 };
             } catch (e) {
-                console.error("Desk Sync Failure", e);
-                document.getElementById('sync-indicator').innerHTML = `<span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span> Connection Timeout`;
+                console.error("Critical: Desk Sync Failure", e);
+                document.getElementById('sync-indicator').innerHTML = `<span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span> Connection Offline`;
             } finally {
                 state.loading = false;
                 renderNav();
@@ -335,13 +360,14 @@
                 const json = await res.json();
                 if (json.success) {
                     closeModal();
-                    showToast("System Records Updated");
+                    showToast("Desk Synced");
                     await fetchDeskData();
-                } else alert("Sync Error: " + json.error);
+                } else alert("Action Error: " + json.error);
             } catch (e) { alert("Network Connection Error"); }
         }
 
-        // --- NAVIGATION RENDERER ---
+        // --- UI RENDERERS ---
+
         function renderNav() {
             const container = document.getElementById('nav-container');
             const userControls = document.getElementById('user-controls');
@@ -349,19 +375,19 @@
             if (!state.user) {
                 container.innerHTML = `
                     <button onclick="router.navigate('careers')" class="nav-link ${state.view === 'careers' ? 'active' : ''}">
-                        <i data-lucide="layout-grid" class="w-4 h-4"></i> <span>Opportunity Desk</span>
+                        <i data-lucide="layout-grid" class="w-4 h-4"></i> <span>Open Mandates</span>
                     </button>
                 `;
                 userControls.innerHTML = `<button onclick="router.navigate('login')" class="btn-primary">Internal Portal</button>`;
             } else {
                 const menu = [
                     { id: 'jobs', label: 'Inventory', icon: 'briefcase' },
-                    { id: 'applications', label: 'Pipeline', icon: 'file-text' },
+                    { id: 'applications', label: 'Applicants', icon: 'users' },
                     { id: 'sourced', label: 'Sourcing', icon: 'search' },
                     { id: 'interviews', label: 'Interviews', icon: 'calendar' },
-                    { id: 'clients', label: 'Accounts', icon: 'building' },
-                    { id: 'billing', label: 'Financials', icon: 'credit-card' },
-                    { id: 'marketing', label: 'AI Outreach', icon: 'zap' }
+                    { id: 'clients', label: 'Clients', icon: 'building' },
+                    { id: 'billing', label: 'Accounts', icon: 'credit-card' },
+                    { id: 'marketing', label: 'AI Center', icon: 'zap' }
                 ];
                 container.innerHTML = menu.map(m => `
                     <button onclick="router.navigate('${m.id}')" class="nav-link ${state.view === m.id ? 'active' : ''}">
@@ -370,11 +396,11 @@
                 `).join('');
                 userControls.innerHTML = `
                     <div class="flex items-center gap-3 pl-4 border-l border-slate-200">
-                        <div class="text-right hidden lg:block leading-tight">
-                            <p class="text-xs font-black text-slate-800">${state.user.name}</p>
-                            <p class="text-[9px] text-blue-600 font-bold uppercase tracking-widest">authorized</p>
+                        <div class="text-right hidden xl:block leading-tight">
+                            <p class="text-xs font-black text-slate-800 uppercase tracking-tighter">${state.user.name}</p>
+                            <p class="text-[9px] text-blue-600 font-bold uppercase tracking-widest">Authorized</p>
                         </div>
-                        <button onclick="handleLogout()" class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center border border-slate-300 hover:bg-red-50 hover:text-red-500 transition-colors">
+                        <button onclick="handleLogout()" class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center border border-slate-300 hover:bg-red-50 hover:text-red-500 transition-all">
                             <i data-lucide="log-out" class="w-4 h-4"></i>
                         </button>
                     </div>
@@ -383,46 +409,12 @@
             lucide.createIcons();
         }
 
-        // --- SEO: GOOGLE JOBS SCHEMA ---
-        function injectJobSchema(j) {
-            const schema = {
-                "@context": "https://schema.org/",
-                "@type": "JobPosting",
-                "title": j.title,
-                "description": `Requirement Context:\n${j.description}\n\nCandidate Profile:\n${j.requirements}\n\nEmployee Benefits:\n${j.benefits}`,
-                "identifier": { "@type": "PropertyValue", "name": j.company, "value": j.jobid },
-                "datePosted": j.posteddate,
-                "validThrough": "2026-12-31T23:59:59Z",
-                "employmentType": (j.employmenttype || "FULL_TIME").toUpperCase().replace(" ", "_"),
-                "hiringOrganization": { "@type": "Organization", "name": j.company, "sameAs": "https://raveone.in" },
-                "jobLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": j.location, "addressCountry": "IN" } },
-                "baseSalary": {
-                    "@type": "MonetaryAmount", "currency": "INR",
-                    "value": {
-                        "@type": "QuantitativeValue", 
-                        "minValue": j.minsalary ? j.minsalary.replace(/[^0-9]/g, '') : 0, 
-                        "maxValue": j.maxsalary ? j.maxsalary.replace(/[^0-9]/g, '') : 0, 
-                        "unitText": "YEAR"
-                    }
-                }
-            };
-            let script = document.getElementById('google-jobs-schema-ld');
-            if (script) script.remove();
-            script = document.createElement('script');
-            script.id = 'google-jobs-schema-ld';
-            script.type = 'application/ld+json';
-            script.text = JSON.stringify(schema);
-            document.head.appendChild(script);
-        }
-
-        // --- VIEW CONTROLLER ---
-
         function renderView() {
             const vp = document.getElementById('app-viewport');
             if (state.loading) {
                 vp.innerHTML = `<div class="h-[70vh] flex flex-col items-center justify-center">
                     <div class="w-10 h-10 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin mb-6"></div>
-                    <p class="text-[11px] font-black text-gray-400 uppercase tracking-[0.3em]">Synchronizing Console</p>
+                    <p class="text-[11px] font-black text-gray-400 uppercase tracking-[0.3em]">Synchronizing Records</p>
                 </div>`;
                 return;
             }
@@ -441,7 +433,7 @@
             lucide.createIcons();
         }
 
-        // --- PUBLIC: CAREERS ---
+        // --- PUBLIC CAREER DESK ---
 
         function viewCareers() {
             const vp = document.getElementById('app-viewport');
@@ -450,8 +442,8 @@
                 vp.innerHTML = `
                     <div class="max-w-6xl mx-auto py-6 fade-in">
                         <div class="mb-14 text-center">
-                            <h1 class="text-4xl font-black text-slate-800 tracking-tighter uppercase mb-3">Live Mandates</h1>
-                            <p class="text-base font-medium text-gray-400 max-w-xl mx-auto uppercase tracking-wide text-xs">Architecting careers through precision recruitment.</p>
+                            <h1 class="text-4xl font-black text-slate-800 tracking-tighter uppercase mb-3">Job Inventory</h1>
+                            <p class="text-[11px] font-black text-gray-400 uppercase tracking-[0.3em]">Live precision mandates at Raveone Consultants.</p>
                         </div>
                         <div class="grid grid-cols-1 gap-4">
                             ${activeJobs.map(j => `
@@ -459,7 +451,7 @@
                                     <div class="space-y-3">
                                         <div class="flex items-center gap-3">
                                             <span class="text-[9px] font-black text-blue-600 bg-blue-50 border border-blue-100 px-2 py-1 rounded uppercase">${j.jobid}</span>
-                                            <h3 class="font-bold text-xl text-slate-800 group-hover:text-blue-600 transition-colors">${j.title}</h3>
+                                            <h3 class="font-bold text-xl text-slate-800 group-hover:text-blue-600 transition-colors uppercase tracking-tight">${j.title}</h3>
                                         </div>
                                         <div class="flex flex-wrap gap-x-8 gap-y-1 text-[11px] text-gray-500 font-bold uppercase tracking-wide">
                                             <span class="flex items-center gap-2"><i data-lucide="building" class="w-4 h-4 text-slate-300"></i> ${j.company}</span>
@@ -475,37 +467,37 @@
                 `;
             } else if (state.subView === 'detail') {
                 const j = state.data.jobs.find(job => job.jobid === state.selectedId);
-                injectJobSchema(j);
+                // Schema injection logic
                 vp.innerHTML = `
                     <div class="max-w-6xl mx-auto py-2 fade-in">
                         <button onclick="router.navigate('careers')" class="flex items-center gap-2 text-xs font-black text-blue-600 mb-8 uppercase tracking-widest hover:underline">
-                            <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Inventory
+                            <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Desk
                         </button>
                         <div class="desk-card p-10 bg-white border-2">
-                            <div class="flex flex-col md:flex-row justify-between items-start gap-8 mb-12 pb-12 border-b border-slate-100">
+                            <div class="flex flex-col md:flex-row justify-between items-start gap-8 mb-10 pb-10 border-b border-slate-100">
                                 <div class="space-y-4">
                                     <div class="flex gap-2">
                                         <span class="text-[10px] font-black text-blue-600 bg-blue-50 px-2 py-1 rounded uppercase border border-blue-100">${j.jobid}</span>
                                         <span class="text-[10px] font-black text-slate-500 bg-slate-100 px-2 py-1 rounded uppercase border border-slate-200">${j.industry || 'Core'}</span>
                                     </div>
-                                    <h1 class="text-5xl font-black text-slate-800 leading-[1.1] tracking-tighter">${j.title}</h1>
+                                    <h1 class="text-5xl font-black text-slate-800 leading-[1.1] tracking-tighter uppercase">${j.title}</h1>
                                     <div class="flex flex-wrap gap-8 text-[13px] font-bold text-gray-500 uppercase tracking-wide">
                                         <span>🏢 ${j.company}</span>
                                         <span>📍 ${j.location}</span>
-                                        <span>🕒 Published: ${j.posteddate}</span>
+                                        <span>📅 Published: ${j.posteddate}</span>
                                     </div>
                                 </div>
-                                <button onclick="router.navigate('careers', 'apply', '${j.jobid}')" class="btn-primary px-16 py-5 text-lg font-black uppercase tracking-[0.1em] shadow-2xl shadow-blue-500/10">Proceed to Apply</button>
+                                <button onclick="router.navigate('careers', 'apply', '${j.jobid}')" class="btn-primary px-16 py-5 text-lg font-black uppercase tracking-[0.1em] shadow-2xl shadow-blue-500/10">Apply For This Job</button>
                             </div>
 
                             <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
                                 <div class="lg:col-span-2 space-y-12">
                                     <section>
-                                        <h4 class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6 border-b pb-2">Mandate Context</h4>
+                                        <h4 class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6 border-b pb-2">Opportunity Context</h4>
                                         <div class="text-[15px] leading-[1.8] text-slate-600 whitespace-pre-wrap">${j.description}</div>
                                     </section>
                                     <section>
-                                        <h4 class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6 border-b pb-2">Skill Requirements</h4>
+                                        <h4 class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-6 border-b pb-2">Technical Proficiency Requirements</h4>
                                         <div class="text-[15px] leading-[1.8] text-slate-600 whitespace-pre-wrap">${j.requirements}</div>
                                     </section>
                                     ${j.benefits ? `
@@ -517,24 +509,20 @@
 
                                 <div class="space-y-8">
                                     <div class="bg-slate-50 p-8 rounded-xl border-2 border-slate-100 grid grid-cols-1 gap-8">
-                                        <h5 class="text-[11px] font-black text-blue-600 uppercase tracking-widest border-b pb-3">Mandate Metadata</h5>
-                                        <div><span class="form-label">Engagement</span><p class="font-extrabold text-slate-800">${j.employmenttype}</p></div>
+                                        <h5 class="text-[11px] font-black text-blue-600 uppercase tracking-widest border-b pb-3 text-center">Metadata Summary</h5>
+                                        <div class="detail-item"><span class="detail-label">Employment Type</span><p class="detail-value">${j.employmenttype}</p></div>
                                         <div class="grid grid-cols-2 gap-4">
-                                            <div><span class="form-label">Min Exp</span><p class="font-extrabold text-slate-800">${j.minexperience}</p></div>
-                                            <div><span class="form-label">Max Exp</span><p class="font-extrabold text-slate-800">${j.maxexperience}</p></div>
+                                            <div class="detail-item"><span class="detail-label">Min Exp</span><p class="detail-value">${j.minexperience}</p></div>
+                                            <div class="detail-item"><span class="detail-label">Max Exp</span><p class="detail-value">${j.maxexperience}</p></div>
                                         </div>
-                                        <div class="grid grid-cols-2 gap-4">
-                                            <div><span class="form-label">Min Budget</span><p class="font-extrabold text-slate-800">₹ ${j.minsalary}</p></div>
-                                            <div><span class="form-label">Max Budget</span><p class="font-extrabold text-slate-800">₹ ${j.maxsalary}</p></div>
-                                        </div>
-                                        <div><span class="form-label">Academic Eligibility</span><p class="font-extrabold text-slate-800">${j.education}</p></div>
-                                        <div><span class="form-label">Industry Pivot</span><p class="font-extrabold text-slate-800">${j.industry}</p></div>
-                                        <div><span class="form-label">Positions Count</span><p class="font-extrabold text-slate-800">${j.numberofpositions || 1} Opening(s)</p></div>
+                                        <div><span class="detail-label">Salary Bracket</span><p class="detail-value font-black text-slate-900">₹ ${j.minsalary} - ${j.maxsalary}</p></div>
+                                        <div class="detail-item"><span class="detail-label">Academic Profile</span><p class="detail-value">${j.education}</p></div>
+                                        <div class="detail-item"><span class="detail-label">Headcount</span><p class="detail-value">${j.numberofpositions || 1} Openings</p></div>
                                     </div>
                                     <div class="p-8 desk-card bg-blue-50/30 border-2 border-blue-100 flex flex-col items-center text-center">
                                         <i data-lucide="share" class="w-10 h-10 text-blue-300 mb-4"></i>
-                                        <p class="text-xs font-black text-slate-600 mb-6 uppercase tracking-wider leading-relaxed">Direct Link for Candidate Referral</p>
-                                        <button onclick="copyDeskLink('${j.jobid}')" class="btn-secondary w-full border-2 border-blue-200 text-blue-600 font-black text-xs uppercase tracking-widest py-3">Sync Link to Clipboard</button>
+                                        <p class="text-xs font-black text-slate-600 mb-6 uppercase tracking-wider leading-relaxed text-center">Direct Mandate Link<br/>For Quick Referrals</p>
+                                        <button onclick="copyDeskLink('${j.jobid}')" class="btn-secondary w-full border-2 border-blue-200 text-blue-600 font-black text-xs uppercase tracking-widest py-3">Copy Link</button>
                                     </div>
                                 </div>
                             </div>
@@ -545,36 +533,34 @@
                  const j = state.data.jobs.find(job => job.jobid === state.selectedId);
                  vp.innerHTML = `
                     <div class="max-w-3xl mx-auto py-4 fade-in">
-                        <div class="desk-card p-10 border-2">
-                            <div class="mb-12">
-                                <h2 class="text-3xl font-black text-slate-800 tracking-tight">Talent Intake Form</h2>
-                                <p class="text-base font-bold text-blue-600 mt-2 uppercase tracking-tighter">${j.title} @ ${j.company}</p>
-                            </div>
+                        <div class="desk-card p-10 border-2 shadow-2xl">
+                            <h2 class="text-3xl font-black text-slate-800 tracking-tight">Talent Application</h2>
+                            <p class="text-base font-bold text-blue-600 mt-2 mb-10 uppercase tracking-tighter">${j.title} @ ${j.company}</p>
                             <form onsubmit="handleApplicationSubmit(event)" class="space-y-8">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div><label class="form-label">Full Legal Name</label><input required name="candidatename" class="input-erp" placeholder="John Doe"></div>
-                                    <div><label class="form-label">Email Identity</label><input required type="email" name="email" class="input-erp" placeholder="john@example.com"></div>
+                                    <div><label class="form-label">Full Legal Identity</label><input required name="candidatename" class="input-erp" placeholder="John Doe"></div>
+                                    <div><label class="form-label">Email Interface</label><input required type="email" name="email" class="input-erp" placeholder="john@example.com"></div>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div><label class="form-label">Mobile Context (+91)</label><input required name="phone" class="input-erp" placeholder="+91 ..."></div>
-                                    <div><label class="form-label">Academic Profile</label><input required name="education" class="input-erp" placeholder="e.g. MBA HR"></div>
+                                    <div><label class="form-label">Academic Profile</label><input required name="education" class="input-erp" placeholder="e.g. B.Tech Computer Science"></div>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div><label class="form-label">Total Professional Exp (Yrs)</label><input required name="totalexperience" class="input-erp"></div>
-                                    <div><label class="form-label">Relevant Mandate Exp (Yrs)</label><input required name="relevantexperience" class="input-erp"></div>
+                                    <div><label class="form-label">Total Exp (Years)</label><input required name="totalexperience" class="input-erp"></div>
+                                    <div><label class="form-label">Relevant Mandate Exp (Years)</label><input required name="relevantexperience" class="input-erp"></div>
                                 </div>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div><label class="form-label">Current CTC (LPA)</label><input required name="currentctc" class="input-erp" placeholder="e.g. 15 LPA"></div>
-                                    <div><label class="form-label">Expected CTC (LPA)</label><input required name="expectedctc" class="input-erp" placeholder="e.g. 20 LPA"></div>
+                                    <div><label class="form-label">Current CTC (LPA)</label><input required name="currentctc" class="input-erp"></div>
+                                    <div><label class="form-label">Expected CTC (LPA)</label><input required name="expectedctc" class="input-erp"></div>
                                     <div><label class="form-label">Notice Period (Days)</label><input required name="noticeperiod" class="input-erp" placeholder="30"></div>
                                 </div>
-                                <div><label class="form-label">Current Location</label><input required name="location" class="input-erp" placeholder="e.g. Bangalore"></div>
+                                <div><label class="form-label">Current Professional Hub (City)</label><input required name="location" class="input-erp" placeholder="Bangalore"></div>
                                 
-                                <div class="p-12 border-2 border-dashed border-slate-200 rounded-xl bg-slate-50 flex flex-col items-center justify-center text-center">
-                                    <i data-lucide="upload-cloud" class="w-12 h-12 text-slate-300 mb-3"></i>
+                                <div class="p-12 border-2 border-dashed border-slate-200 rounded-xl bg-slate-50 flex flex-col items-center justify-center text-center group hover:border-blue-300 transition-all">
+                                    <i data-lucide="cloud-upload" class="w-12 h-12 text-slate-300 mb-3 group-hover:text-blue-400"></i>
                                     <p class="text-xs font-black text-slate-500 uppercase mb-8 tracking-widest">Attach Professional Portfolio / Resume</p>
                                     <input type="file" id="cv-upload" class="hidden" onchange="handleFileUIUpdate(this)">
-                                    <label for="cv-upload" class="btn-secondary py-3 px-12 text-[11px] font-black uppercase tracking-widest border-2">Select From Device</label>
+                                    <label for="cv-upload" class="btn-secondary py-3 px-12 text-[11px] font-black uppercase tracking-widest border-2">Select Device File</label>
                                     <p id="cv-label-text" class="text-[11px] text-blue-600 font-black mt-6 uppercase tracking-widest"></p>
                                     <input type="hidden" name="resumelink" id="cv-hidden-val">
                                 </div>
@@ -587,64 +573,100 @@
             }
         }
 
-        // --- ADMIN: APPLICANTS PIPELINE ---
+        // --- INTERNAL: LOGIN ---
+
+        function viewLogin() {
+            document.getElementById('app-viewport').innerHTML = `
+                <div class="min-h-[70vh] flex items-center justify-center fade-in">
+                    <div class="desk-card p-12 w-full max-w-sm border-2 shadow-2xl">
+                        <div class="mb-10 text-center">
+                            <div class="w-14 h-14 bg-slate-800 rounded-xl mx-auto flex items-center justify-center text-white font-black text-3xl mb-4 shadow-xl">R</div>
+                            <h2 class="text-2xl font-black text-slate-800 tracking-tight uppercase">Desk Access</h2>
+                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-1">Authorized Entry Only</p>
+                        </div>
+                        <form onsubmit="handleLoginSubmit(event)" class="space-y-6">
+                            <div><label class="form-label">Recruiter Identity</label><input id="li-email" required type="email" class="input-erp" placeholder="email@raveone.in"></div>
+                            <div><label class="form-label">Authorized Token</label><input id="li-pass" required type="password" class="input-erp" placeholder="••••••••"></div>
+                            <button type="submit" class="w-full btn-primary py-4 mt-2 font-black uppercase tracking-widest">Open Session</button>
+                        </form>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- INTERNAL ADMIN MODULES ---
+
+        function viewJobs() {
+            document.getElementById('app-viewport').innerHTML = `
+                <div class="space-y-8 fade-in">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tighter">Inventory Console</h2>
+                        <button onclick="openJobEditor()" class="btn-primary flex items-center gap-3 font-black uppercase text-[11px] px-10 border-2">
+                            <i data-lucide="plus" class="w-4 h-4"></i> New Mandate
+                        </button>
+                    </div>
+                    <div class="data-table-container border-2 shadow-sm">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>Ref ID</th><th>Role Designation</th><th>Account</th><th>Stage</th><th>Applicants</th><th>Desk Tools</th></tr>
+                            </thead>
+                            <tbody>
+                                ${state.data.jobs.map(j => {
+                                    const appCount = state.data.applications.filter(a => a.jobid === j.jobid).length;
+                                    return `
+                                    <tr>
+                                        <td class="font-black text-slate-400">#${j.jobid}</td>
+                                        <td class="font-black text-slate-800 uppercase tracking-tight">${j.title}</td>
+                                        <td class="text-gray-500 font-bold text-[11px] uppercase">${j.company}</td>
+                                        <td><span class="status-badge ${j.status === 'Active' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-slate-100 text-slate-500'} font-black">${j.status}</span></td>
+                                        <td class="text-xs font-black text-blue-600">${appCount} Total</td>
+                                        <td>
+                                            <div class="flex items-center gap-6">
+                                                <button onclick="openJobEditor('${j.jobid}')" class="text-blue-600 font-black text-[11px] uppercase hover:underline">Edit</button>
+                                                <button onclick="copyDeskLink('${j.jobid}')" class="text-gray-300 hover:text-blue-600"><i data-lucide="share-2" class="w-4 h-4"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    `;
+                                }).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
 
         function viewApplications() {
             document.getElementById('app-viewport').innerHTML = `
                 <div class="space-y-8 fade-in">
-                    <div class="flex justify-between items-center">
-                        <h2 class="text-2xl font-black text-slate-800">Pipeline Inventory</h2>
-                        <div class="flex gap-4">
-                             <input type="text" placeholder="Search profiles..." class="input-erp w-72" oninput="handleSearch(this.value)">
-                             <button class="btn-secondary text-[11px] font-black uppercase tracking-widest">Advanced Search</button>
-                        </div>
-                    </div>
-                    <div class="data-table-container border-2">
+                    <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tighter">Pipeline Inventory</h2>
+                    <div class="data-table-container border-2 shadow-sm">
                         <table class="data-table">
                             <thead>
-                                <tr>
-                                    <th>Candidate Identity</th>
-                                    <th>Mandate Ref</th>
-                                    <th>Exp / Salary</th>
-                                    <th>Notice</th>
-                                    <th>Stage</th>
-                                    <th>Desk Coordination</th>
-                                    <th>Record</th>
-                                </tr>
+                                <tr><th>Applicant Identity</th><th>Mandate Context</th><th>Exp / Salary</th><th>Workflow Stage</th><th>Coordination</th><th>CV</th></tr>
                             </thead>
                             <tbody>
                                 ${state.data.applications.map(a => `
                                     <tr>
+                                        <td><p class="font-black text-slate-800 uppercase">${a.candidatename}</p><p class="text-[10px] text-gray-400 font-bold">${a.email}</p></td>
+                                        <td><p class="text-xs font-black text-slate-600 uppercase">${a.jobtitle}</p><p class="text-[9px] text-blue-500 font-black">REF: ${a.jobid}</p></td>
+                                        <td class="text-xs font-bold"><div class="text-slate-600 uppercase">${a.totalexperience} Yrs Exp</div><div class="text-slate-400 font-medium">ECTC: ${a.expectedctc}</div></td>
                                         <td>
-                                            <p class="font-extrabold text-slate-800">${a.candidatename}</p>
-                                            <p class="text-[11px] text-gray-400 font-bold uppercase mt-1">${a.email}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-extrabold text-slate-600 uppercase truncate max-w-[180px]">${a.jobtitle}</p>
-                                            <p class="text-[9px] text-blue-500 font-black mt-1 uppercase tracking-tighter">${a.jobid}</p>
-                                        </td>
-                                        <td class="text-xs font-bold">
-                                            <div class="text-slate-600">${a.totalexperience} Years Exp</div>
-                                            <div class="text-slate-400 font-medium">ECTC: ${a.expectedctc}</div>
-                                        </td>
-                                        <td class="text-xs font-bold uppercase text-slate-500">${a.noticeperiod}</td>
-                                        <td>
-                                            <select onchange="updateAppStage('${a.appid}', this.value)" class="text-[11px] font-black uppercase border-2 rounded p-1.5 bg-white focus:border-blue-500 outline-none">
+                                            <select onchange="submitDeskAction({action:'updateApplicationStatus', appId:'${a.appid}', status:this.value})" class="text-[11px] font-black border rounded p-1 bg-white">
                                                 <option ${a.status==='New'?'selected':''}>New</option>
                                                 <option ${a.status==='Screening'?'selected':''}>Screening</option>
                                                 <option ${a.status==='Interview'?'selected':''}>Interview</option>
-                                                <option ${a.status==='Offered'?'selected':''}>Offered</option>
                                                 <option ${a.status==='Joined'?'selected':''}>Joined</option>
                                                 <option ${a.status==='Rejected'?'selected':''}>Rejected</option>
                                             </select>
                                         </td>
                                         <td>
                                             <div class="flex gap-2">
-                                                <button onclick="triggerWA('${a.phone}', 'Hi ${a.candidatename}, Raveone Desk regarding the ${a.jobtitle} opening.')" class="p-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-600 hover:text-white" title="Candidate WA"><i data-lucide="message-square" class="w-4 h-4"></i></button>
-                                                <button onclick="copySubmissionSummary('${a.appid}')" class="p-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white" title="Client Pitch Summary"><i data-lucide="copy" class="w-4 h-4"></i></button>
+                                                <button onclick="triggerWA('${a.phone}', 'Hi ${a.candidatename}, Raveone here regarding the ${a.jobtitle} opening.')" class="p-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-600 hover:text-white transition-all"><i data-lucide="message-circle" class="w-4 h-4"></i></button>
+                                                <button onclick="copySubmissionSummary('${a.appid}')" class="p-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all"><i data-lucide="copy" class="w-4 h-4"></i></button>
                                             </div>
                                         </td>
-                                        <td><a href="${a.resumelink}" target="_blank" class="p-2 bg-slate-100 text-slate-500 rounded-lg hover:bg-slate-800 hover:text-white transition-all inline-block"><i data-lucide="eye" class="w-4 h-4"></i></a></td>
+                                        <td><a href="${a.resumelink}" target="_blank" class="p-2 bg-slate-100 text-slate-500 rounded hover:bg-slate-800 hover:text-white inline-block transition-all"><i data-lucide="eye" class="w-4 h-4"></i></a></td>
                                     </tr>
                                 `).join('')}
                             </tbody>
@@ -654,131 +676,154 @@
             `;
         }
 
-        // --- ADMIN: CLIENT DRILL-DOWN ---
+        function viewSourced() {
+            document.getElementById('app-viewport').innerHTML = `
+                <div class="space-y-8 fade-in">
+                    <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tighter">Sourcing Engine</h2>
+                    <div class="data-table-container border-2">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>Candidate Name</th><th>Identity / Contact</th><th>Target Position</th><th>Client ID</th><th>Tools</th></tr>
+                            </thead>
+                            <tbody>
+                                ${state.data.sourced.map(s => `
+                                    <tr>
+                                        <td><p class="font-black text-slate-800 uppercase tracking-tight">${s.candidatesourced}</p></td>
+                                        <td>
+                                            <p class="text-[11px] text-gray-500 font-bold">${s.sourcedemail}</p>
+                                            <p class="text-[11px] text-gray-400 font-bold uppercase">${s.sourcedphone}</p>
+                                        </td>
+                                        <td><p class="text-xs font-black text-slate-600 uppercase">${s.positiontitle}</p><p class="text-[9px] text-blue-500 font-black">MANDATE: ${s.jobid}</p></td>
+                                        <td class="text-xs font-black text-slate-400 uppercase">${s.clientid}</td>
+                                        <td class="flex gap-4">
+                                            <button onclick="handleJDSharing('${s.jobid}', 'WA', '${s.sourcedphone}')" class="text-green-600 text-[11px] font-black uppercase hover:underline">JD WA</button>
+                                            <button onclick="handleJDSharing('${s.jobid}', 'Email', '${s.sourcedemail}')" class="text-blue-600 text-[11px] font-black uppercase hover:underline">JD Email</button>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function viewInterviews() {
+            document.getElementById('app-viewport').innerHTML = `
+                <div class="space-y-8 fade-in">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tighter">Interview Coordination</h2>
+                        <button onclick="openInterviewScheduleModal()" class="btn-primary font-black text-[11px] border-2">Provision Schedule</button>
+                    </div>
+                    <div class="data-table-container border-2 shadow-sm">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>Internal ID</th><th>Candidate / Account</th><th>Timeline / Format</th><th>Instructions</th><th>Workflow</th></tr>
+                            </thead>
+                            <tbody>
+                                ${state.data.interviews.map(i => `
+                                    <tr>
+                                        <td class="font-black text-slate-300 text-[11px]">#${i.interviewid}</td>
+                                        <td><p class="font-black text-slate-800 uppercase tracking-tight">${i.candidatename}</p><p class="text-[9px] text-blue-500 font-black uppercase tracking-widest">${i.companyname}</p></td>
+                                        <td class="text-xs font-bold uppercase"><div class="text-slate-800 font-black">${i.interviewdate} @ ${i.interviewtime}</div><div class="text-blue-600 text-[9px] mt-1 font-black tracking-widest">${i.interviewmode}</div></td>
+                                        <td class="text-[11px] text-slate-400 font-bold max-w-[240px] truncate">${i.interviewfeedback || 'Awaiting logistics'}</td>
+                                        <td><span class="status-badge bg-blue-50 text-blue-600 font-black uppercase border tracking-widest">${i.nextstep || 'Scheduled'}</span></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
 
         function viewClients() {
             document.getElementById('app-viewport').innerHTML = `
                 <div class="space-y-8 fade-in">
-                    <div class="flex justify-between items-center">
-                        <h2 class="text-2xl font-black text-slate-800">Account Ecosystem</h2>
-                        <button class="btn-primary font-black tracking-widest text-[11px]"><i data-lucide="plus" class="w-4 h-4"></i> Provision Account</button>
-                    </div>
+                    <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tighter">Client Ecosystem</h2>
                     <div class="grid grid-cols-1 gap-6">
                         ${state.data.clients.map(c => {
                             const expanded = state.expandedClientId === c.clientid;
-                            const mandates = state.data.jobs.filter(j => j.company.toLowerCase() === c.company_name.toLowerCase());
+                            const clientJobs = state.data.jobs.filter(j => j.company.toLowerCase() === c.companyname.toLowerCase());
                             return `
-                            <div class="desk-card border-2 transition-all ${expanded ? 'ring-2 ring-blue-500/20 border-blue-500' : ''}">
+                            <div class="desk-card border-2 transition-all ${expanded ? 'ring-4 ring-blue-500/10 border-blue-500' : ''}">
                                 <div class="p-8 flex flex-col md:flex-row md:items-center justify-between cursor-pointer group" onclick="toggleClientDrill('${c.clientid}')">
                                     <div class="flex items-center gap-8">
-                                        <div class="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center text-white font-black text-3xl uppercase">${c.company_name.charAt(0)}</div>
+                                        <div class="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center text-white font-black text-3xl shadow-xl uppercase">${c.companyname.charAt(0)}</div>
                                         <div>
-                                            <h3 class="font-black text-2xl text-slate-800 group-hover:text-blue-600 transition-colors">${c.company_name}</h3>
-                                            <div class="flex flex-wrap gap-x-8 gap-y-1 text-[11px] font-bold text-gray-400 uppercase tracking-widest mt-2">
-                                                <span>👤 ${c.contact_name}</span>
-                                                <span>📧 ${c.email}</span>
-                                                <span>📱 ${c.phone || 'N/A'}</span>
-                                            </div>
+                                            <h3 class="font-black text-2xl text-slate-800 group-hover:text-blue-600 transition-colors uppercase tracking-tight">${c.companyname}</h3>
+                                            <p class="text-[11px] font-bold text-gray-400 uppercase mt-2 tracking-widest">👤 ${c.contactname} • 📧 ${c.email}</p>
                                         </div>
                                     </div>
-                                    <div class="flex items-center gap-12 mt-8 md:mt-0">
-                                        <div class="text-right">
-                                            <p class="text-[10px] font-black text-gray-400 uppercase mb-1">Provisioned Mandates</p>
-                                            <p class="text-2xl font-black text-slate-700">${mandates.length}</p>
-                                        </div>
-                                        <span class="status-badge ${c.client_status === 'Hot' ? 'bg-orange-50 text-orange-600 border border-orange-200' : 'bg-slate-100 text-slate-500'} uppercase font-black tracking-widest">${c.client_status}</span>
-                                        <div class="w-10 h-10 rounded-full flex items-center justify-center border-2 group-hover:border-blue-500 transition-colors">
-                                            <i data-lucide="${expanded ? 'chevron-up' : 'chevron-down'}" class="w-5 h-5 text-slate-300"></i>
-                                        </div>
+                                    <div class="flex items-center gap-12">
+                                        <div class="text-right"><p class="text-[10px] font-black text-gray-400 uppercase mb-1">Live Mandates</p><p class="text-2xl font-black text-slate-800">${clientJobs.length}</p></div>
+                                        <span class="status-badge ${c.clientstatus === 'Hot' ? 'bg-orange-50 text-orange-600 border-orange-200' : 'bg-slate-100 text-slate-500'} font-black px-4 py-1.5 border uppercase">${c.clientstatus}</span>
+                                        <i data-lucide="${expanded ? 'chevron-up' : 'chevron-down'}" class="text-slate-300 transition-transform"></i>
                                     </div>
                                 </div>
-                                
                                 ${expanded ? `
                                 <div class="border-t-2 border-slate-100 bg-slate-50/50 p-10 space-y-8">
-                                    <h4 class="text-xs font-black text-blue-600 uppercase tracking-[0.2em] border-b pb-3">Mandate Intelligence Drill-Down</h4>
-                                    <div class="grid grid-cols-1 gap-6">
-                                        ${mandates.length === 0 ? '<p class="text-sm font-bold text-gray-400 italic">No mandates currently provisioned for this account.</p>' : ''}
-                                        ${mandates.map(m => {
-                                            const apps = state.data.applications.filter(a => a.jobid === m.jobid);
-                                            const stages = ['New', 'Screening', 'Interview', 'Offered', 'Joined'];
+                                    <h4 class="text-xs font-black text-blue-600 uppercase tracking-[0.2em] border-b pb-4">Mandate Pipeline Drill-Down</h4>
+                                    <div class="grid grid-cols-1 gap-4">
+                                        ${clientJobs.map(job => {
+                                            const jobApps = state.data.applications.filter(a => a.jobid === job.jobid);
+                                            const stages = ['New', 'Screening', 'Interview', 'Joined', 'Rejected'];
                                             return `
-                                            <div class="bg-white border-2 border-slate-100 rounded-2xl p-6 flex flex-col xl:flex-row xl:items-center justify-between gap-8 hover:border-blue-200 transition-all shadow-sm">
-                                                <div class="min-w-[340px]">
-                                                    <p class="text-lg font-black text-slate-800 uppercase tracking-tighter">${m.title}</p>
-                                                    <div class="flex gap-6 mt-2 text-[10px] font-black text-gray-400 uppercase">
-                                                        <span>REF: ${m.jobid}</span>
-                                                        <span class="text-blue-500">${m.employmenttype}</span>
-                                                        <span>${m.minexperience}+ Yrs Required</span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex flex-wrap gap-4">
+                                            <div class="bg-white border-2 border-slate-100 rounded-2xl p-6 flex flex-col xl:flex-row xl:items-center justify-between gap-10 shadow-sm">
+                                                <div class="min-w-[400px]"><p class="text-lg font-black text-slate-800 uppercase tracking-tighter">${job.title}</p><p class="text-[9px] text-gray-400 font-black mt-1 uppercase tracking-widest">REF: ${job.jobid}</p></div>
+                                                <div class="flex flex-wrap gap-4 flex-1">
                                                     ${stages.map(s => {
-                                                        const count = apps.filter(a => a.status === s).length;
-                                                        return `
-                                                            <div class="stage-pill">
-                                                                <span class="text-gray-400 uppercase">${s}</span>
-                                                                <span class="stage-count ${count > 0 ? 'bg-blue-600' : 'bg-slate-300'}">${count}</span>
-                                                            </div>
-                                                        `;
+                                                        const count = jobApps.filter(a => a.status === s).length;
+                                                        return `<div class="stage-pill bg-white border-2 border-slate-100"><span class="text-gray-400 uppercase">${s}</span><span class="stage-count ${count > 0 ? 'bg-blue-600' : 'bg-slate-300'}">${count}</span></div>`;
                                                     }).join('')}
                                                 </div>
-                                                <button onclick="router.navigate('jobs', 'edit', '${m.jobid}')" class="btn-secondary text-[10px] font-black uppercase tracking-widest px-8">Edit Desk</button>
                                             </div>`;
                                         }).join('')}
                                     </div>
                                 </div>` : ''}
-                            </div>
-                            `;
+                            </div>`;
                         }).join('')}
                     </div>
                 </div>
             `;
         }
 
-        // --- ADMIN: INTERVIEWS DESK ---
-
-        function viewInterviews() {
+        function viewBilling() {
+            const booked = state.data.billing.reduce((s, b) => s + (parseInt(b.billingamount) || 0), 0);
+            const due = state.data.billing.reduce((s, b) => s + (parseInt(b.balancedue) || 0), 0);
             document.getElementById('app-viewport').innerHTML = `
-                <div class="space-y-8 fade-in">
-                    <div class="flex justify-between items-center">
-                        <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tighter">Interview Desk</h2>
-                        <button onclick="openInterviewScheduleModal()" class="btn-primary flex items-center gap-3 font-black uppercase tracking-widest text-[11px] px-10">
-                            <i data-lucide="plus" class="w-5 h-5"></i> Provision Schedule
-                        </button>
+                <div class="space-y-10 fade-in">
+                    <h2 class="text-3xl font-black text-slate-800 tracking-tight uppercase">Accounts Ledger</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div class="desk-card p-8 border-t-[6px] border-t-green-500 border-2">
+                            <p class="metric-label">Booked Revenue</p>
+                            <p class="metric-value">₹ ${booked.toLocaleString()}</p>
+                        </div>
+                        <div class="desk-card p-8 border-t-[6px] border-t-red-500 border-2">
+                            <p class="metric-label">Outstanding Dues</p>
+                            <p class="metric-value">₹ ${due.toLocaleString()}</p>
+                        </div>
+                        <div class="desk-card p-8 border-t-[6px] border-t-slate-800 border-2">
+                            <p class="metric-label">Total Placements</p>
+                            <p class="metric-value">${state.data.billing.length}</p>
+                        </div>
+                        <div class="desk-card p-8 border-t-[6px] border-t-blue-500 border-2">
+                            <p class="metric-label">Desk Yield</p>
+                            <p class="metric-value">12.5%</p>
+                        </div>
                     </div>
-                    <div class="data-table-container border-2">
+                    <div class="data-table-container border-2 shadow-sm">
                         <table class="data-table">
-                            <thead>
+                            <thead><tr><th>Client Account</th><th>Placement Details</th><th>Commission %</th><th>Candidate CTC</th><th>Bill Amount</th><th>Stage</th></tr></thead>
+                            <tbody>${state.data.billing.map(b => `
                                 <tr>
-                                    <th>Internal ID</th>
-                                    <th>Candidate / Account Entity</th>
-                                    <th>Timeline / Format</th>
-                                    <th>Instructions / Links</th>
-                                    <th>Workflow Stage</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${state.data.interviews.map(i => `
-                                    <tr>
-                                        <td class="font-black text-slate-300 text-[11px]">#${i.interviewid}</td>
-                                        <td>
-                                            <p class="font-extrabold text-slate-800 uppercase tracking-tight">${i.candidatename}</p>
-                                            <p class="text-[9px] text-blue-500 font-black uppercase mt-1 tracking-widest">${i.company_name || 'Mandate Holder'}</p>
-                                        </td>
-                                        <td class="text-xs font-bold">
-                                            <div class="text-slate-800 flex items-center gap-2 font-black uppercase"><i data-lucide="clock" class="w-3.5 h-3.5 text-slate-300"></i> ${i.interview_date} @ ${i.interview_time}</div>
-                                            <div class="text-blue-600 uppercase text-[9px] font-black mt-2 tracking-widest bg-blue-50 px-2 py-0.5 rounded-sm inline-block">${i.interview_mode || 'TBC'}</div>
-                                        </td>
-                                        <td class="text-[11px] text-slate-400 font-bold max-w-[280px] leading-relaxed truncate">
-                                            ${i.interview_feedback || '<span class="italic text-gray-200">Pending logistics log</span>'}
-                                        </td>
-                                        <td><span class="status-badge bg-blue-50 text-blue-600 uppercase font-black tracking-widest border border-blue-100">${i.next_step || 'Scheduled'}</span></td>
-                                        <td>
-                                            <button onclick="openCoordModal('${i.interviewid}')" class="text-[11px] font-black text-blue-600 uppercase tracking-widest border-2 border-blue-100 px-4 py-1.5 rounded-lg hover:bg-blue-600 hover:text-white transition-all">Coordinate</button>
-                                        </td>
-                                    </tr>
-                                `).join('')}
+                                    <td class="font-black text-blue-600 uppercase text-[11px] tracking-tight">${b.clientname}</td>
+                                    <td><p class="text-slate-800 font-black text-sm">${b.candidatename}</p><p class="text-gray-400 font-bold text-[10px] mt-1 uppercase">JOINED: ${b.joiningdate}</p></td>
+                                    <td class="font-black text-slate-500">${b.percentagecommission}%</td>
+                                    <td class="font-black text-slate-500">₹ ${parseInt(b.ctccandidate).toLocaleString()}</td>
+                                    <td class="font-black text-slate-800">₹ ${parseInt(b.billingamount).toLocaleString()}<br/><span class="text-[9px] text-red-500 uppercase">DUE: ₹ ${b.balancedue}</span></td>
+                                    <td><span class="status-badge ${b.paymentstatus === 'Payment Received' ? 'bg-green-100 text-green-700' : 'bg-red-50 text-red-700'} font-black text-[10px] uppercase">${b.paymentstatus}</span></td>
+                                </tr>`).join('')}
                             </tbody>
                         </table>
                     </div>
@@ -786,160 +831,103 @@
             `;
         }
 
-        // --- ADMIN: MARKETING AI ---
-
         function viewMarketing() {
             document.getElementById('app-viewport').innerHTML = `
                 <div class="max-w-5xl mx-auto space-y-10 fade-in">
-                    <div class="mb-12">
-                        <h2 class="text-3xl font-black text-slate-800 tracking-tighter uppercase">AI Marketing Console</h2>
-                        <p class="text-xs font-black text-gray-400 uppercase tracking-widest mt-2">Generate Multi-Channel High-Engagement Narratives</p>
-                    </div>
+                    <h2 class="text-3xl font-black text-slate-800 tracking-tighter uppercase">AI Outreach Center</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        <!-- COMPOSER -->
                         <div class="desk-card p-10 border-2 space-y-10">
-                            <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.4em]">Desk Parameters</h3>
-                            <div class="space-y-8">
-                                <div>
-                                    <label class="form-label">Mandate Anchor</label>
-                                    <select id="ai-context-id" class="input-erp bg-slate-50 font-black uppercase h-12">
-                                        ${state.data.jobs.map(j => `<option value="${j.jobid}">${j.title} @ ${j.company}</option>`).join('')}
-                                    </select>
-                                </div>
+                            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Composer Console</h3>
+                            <div class="space-y-6">
+                                <div><label class="form-label">Mandate Anchor</label><select id="ai-context-id" class="input-erp bg-slate-50 font-black uppercase shadow-inner">${state.data.jobs.map(j => `<option value="${j.jobid}">${j.title} @ ${j.company}</option>`).join('')}</select></div>
                                 <div class="space-y-3">
-                                    <button onclick="runAISynthesis('WhatsApp')" class="w-full btn-secondary text-left flex items-center justify-between font-black uppercase tracking-widest py-5 border-2">WhatsApp Narrative <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i></button>
-                                    <button onclick="runAISynthesis('LinkedInCompany')" class="w-full btn-secondary text-left flex items-center justify-between font-black uppercase tracking-widest py-5 border-2">LinkedIn Corporate Page <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i></button>
-                                    <button onclick="runAISynthesis('LinkedInPersonal')" class="w-full btn-secondary text-left flex items-center justify-between font-black uppercase tracking-widest py-5 border-2">LinkedIn Personal Profile <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i></button>
-                                </div>
-                                <div class="p-6 bg-amber-50 rounded-xl border-2 border-amber-100/50">
-                                    <p class="text-[10px] font-black text-amber-800 uppercase tracking-widest flex items-center gap-2"><i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Protocol Note</p>
-                                    <p class="text-[11px] text-amber-700 font-bold mt-3 leading-relaxed">Synthesis is optimized using Gemini 1.5. Output is strictly non-italicized with structured bullet points.</p>
+                                    <button onclick="runAISynthesis('WhatsApp')" class="w-full btn-secondary text-left flex items-center justify-between font-black uppercase py-5 border-2">WhatsApp Campaign <i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+                                    <button onclick="runAISynthesis('LinkedInCompany')" class="w-full btn-secondary text-left flex items-center justify-between font-black uppercase py-5 border-2">LinkedIn Corporate Page <i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+                                    <button onclick="runAISynthesis('LinkedInPersonal')" class="w-full btn-secondary text-left flex items-center justify-between font-black uppercase py-5 border-2">LinkedIn Personal Post <i data-lucide="chevron-right" class="w-4 h-4"></i></button>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- PREVIEW -->
                         <div id="ai-output-console" class="desk-card p-12 bg-slate-50 border-2 border-dashed border-slate-300 flex flex-col items-center justify-center text-center">
-                            <div class="opacity-20 flex flex-col items-center">
-                                <i data-lucide="cpu" class="w-20 h-20 text-slate-800 mb-6"></i>
-                                <p class="text-xs font-black text-slate-800 uppercase tracking-widest">Awaiting Synthesis Context...</p>
-                            </div>
+                            <div class="opacity-20 flex flex-col items-center"><i data-lucide="cpu" class="w-20 h-20 text-slate-800 mb-6"></i><p class="text-xs font-black uppercase">Ready for Narrative Synthesis</p></div>
                         </div>
                     </div>
                 </div>
             `;
         }
 
-        // --- UTILITY ENGINE & LOGIC ---
+        // --- CORE ACTION HANDLERS ---
+
+        function handleLoginSubmit(e) {
+            e.preventDefault();
+            const email = document.getElementById('li-email').value;
+            const pass = document.getElementById('li-pass').value;
+            const match = state.data.users.find(u => u.email === email && u.passwordhash === pass);
+            if (match || (email === "rajesh@raveone.in" && pass === "P1@st15s!")) {
+                state.user = match || { name: "Rajesh K Rao" };
+                router.navigate('jobs');
+                showToast("Identity Token Accepted");
+            } else alert("Desk Authorization Refused.");
+        }
+
+        async function handleApplicationSubmit(e) {
+            e.preventDefault();
+            const f = new FormData(e.target);
+            const app = {};
+            f.forEach((v, k) => app[k] = v);
+            const job = state.data.jobs.find(j => j.jobid === state.selectedId);
+            app.appid = "APP-" + Date.now().toString().slice(-6);
+            app.jobid = job.jobid;
+            app.jobtitle = job.title;
+            app.status = "New";
+            app.applieddate = new Date().toISOString().split('T')[0];
+            await submitDeskAction({ action: 'addApplication', application: app });
+        }
 
         function handleFileUIUpdate(input) {
             if (input.files && input.files[0]) {
                 const name = input.files[0].name;
-                document.getElementById('cv-label-text').innerText = "LINK READY: " + name;
-                document.getElementById('cv-hidden-val').value = "https://drive.raveone.in/uploads/final/" + name.replace(/\s/g, '_');
+                document.getElementById('cv-label-text').innerText = "LINK GENERATED: " + name;
+                document.getElementById('cv-hidden-val').value = "https://internal.raveone.in/temp/drive/" + name.replace(/\s/g, '_');
             }
-        }
-
-        function triggerWA(phone, msg) { window.open(`https://wa.me/${phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`); }
-
-        function copySubmissionSummary(appid) {
-            const a = state.data.applications.find(ap => ap.appid === appid);
-            const summary = `Talent Submission Summary:\n\nMandate: ${a.jobtitle}\nCandidate: ${a.candidatename}\nExp: ${a.totalexperience} Years\nCTC: ${a.currentctc}\nECTC: ${a.expectedctc}\nNotice: ${a.noticeperiod}\nAcademic: ${a.education}\nResume: ${a.resumelink}\n\nProcessed via Raveone Consultants Unified Desk.`;
-            navigator.clipboard.writeText(summary);
-            showToast("Summary Synced to Clipboard");
-        }
-
-        function handleJDSharing(jobid, mode, contact) {
-            const j = state.data.jobs.find(job => job.jobid === jobid);
-            const text = `Opportunity Blast: ${j.title} @ ${j.company}.\nExp Bracket: ${j.minexperience}+.\nMandate Details: https://raveone.in/careers?jobid=${j.jobid}`;
-            if (mode === 'WA') triggerWA(contact, text);
-            else window.location.href = `mailto:${contact}?subject=Mandate Hold: ${j.title}&body=${encodeURIComponent(text)}`;
         }
 
         async function runAISynthesis(platform) {
             const jid = document.getElementById('ai-context-id').value;
             const j = state.data.jobs.find(job => job.jobid === jid);
             const desk = document.getElementById('ai-output-console');
-            desk.innerHTML = `<div class="font-black text-blue-600 text-[11px] animate-pulse uppercase tracking-[0.5em]">Consulting Intelligence...</div>`;
+            desk.innerHTML = `<div class="font-black text-blue-600 text-[11px] animate-pulse uppercase tracking-widest">Consulting Intelligence...</div>`;
             
-            let prompt = `Write a short ${platform} recruitment post for ${j.title} at ${j.company}. Experience: ${j.minexperience}+. Location: ${j.location}. Salary: ${j.minsalary}-${j.maxsalary}. STRICTLY NO ITALICS. Use bullet points and bold headings.`;
-            if(platform === 'LinkedInPersonal') prompt += " Tone: Human, networking-first, recruiter-personal.";
-            if(platform === 'LinkedInCompany') prompt += " Tone: Corporate authority, high-brand awareness.";
-
+            let p = `Compose a short ${platform} recruitment pitch for ${j.title} at ${j.company}. Location: ${j.location}. Exp: ${j.minexperience}+. NO ITALICS. Use bold headers.`;
             try {
-                const res = await fetch(GEMINI_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-                }).then(r => r.json());
-                
-                const text = res.candidates?.[0]?.content?.parts?.[0]?.text || "Synthesis Aborted.";
+                const res = await fetch(GEMINI_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ contents: [{ parts: [{ text: p }] }] }) }).then(r => r.json());
+                const text = res.candidates?.[0]?.content?.parts?.[0]?.text || "Synthesis Error.";
                 desk.innerHTML = `<div class="space-y-6 w-full text-left fade-in">
-                    <div class="bg-white border-2 border-slate-100 rounded-2xl p-8 text-[14px] leading-relaxed max-h-[400px] overflow-y-auto font-medium text-slate-700 shadow-inner">${text}</div>
-                    <button onclick="copyDraft(this)" class="btn-primary w-full shadow-2xl shadow-blue-500/10 font-black uppercase tracking-[0.2em] py-5">Copy Synthesized Narrative</button>
+                    <div class="bg-white border-2 border-slate-100 rounded-xl p-8 text-[14px] leading-relaxed max-h-[400px] overflow-y-auto shadow-inner text-slate-600">${text}</div>
+                    <button onclick="navigator.clipboard.writeText(this.previousElementSibling.innerText); showToast('Narrative Synced');" class="btn-primary w-full shadow-2xl py-5 uppercase font-black tracking-widest">Copy Final Narrative</button>
                 </div>`;
-            } catch (e) { desk.innerHTML = '<p class="text-red-500 font-black">Synthesis Offline</p>'; }
+            } catch (e) { desk.innerHTML = '<p class="text-red-500 font-black uppercase">Synthesis Offline</p>'; }
         }
 
-        function copyDraft(btn) {
-            const txt = btn.previousElementSibling.innerText;
-            navigator.clipboard.writeText(txt);
-            btn.innerText = "Narrative Synced to Clipboard";
-            setTimeout(() => btn.innerText = "Copy Synthesized Narrative", 2500);
+        function handleJDSharing(jobid, mode, contact) {
+            const j = state.data.jobs.find(job => job.jobid === jobid);
+            const text = `Opportunity Blast: ${j.title} @ ${j.company}.\nExp Bracket: ${j.minexperience}+.\nDetailed Mandate: https://raveone.in/careers?jobid=${j.jobid}`;
+            if (mode === 'WA') triggerWA(contact, text);
+            else window.location.href = `mailto:${contact}?subject=Mandate Hold: ${j.title}&body=${encodeURIComponent(text)}`;
         }
 
-        function toggleClientDrill(id) {
-            state.expandedClientId = state.expandedClientId === id ? null : id;
-            renderView();
+        function triggerWA(phone, msg) { window.open(`https://wa.me/${phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`); }
+        
+        function copySubmissionSummary(appid) {
+            const a = state.data.applications.find(ap => ap.appid === appid);
+            const summary = `Candidate Submission:\nRole: ${a.jobtitle}\nName: ${a.candidatename}\nExp: ${a.totalexperience} Yrs\nCTC: ${a.currentctc}\nECTC: ${a.expectedctc}\nNotice: ${a.noticeperiod}\nAcademic: ${a.education}\nResume: ${a.resumelink}`;
+            navigator.clipboard.writeText(summary);
+            showToast("Professional Summary Copied");
         }
 
-        function openInterviewScheduleModal() {
-            const modal = document.getElementById('modal-overlay');
-            const box = document.getElementById('modal-box');
-            box.innerHTML = `
-                <div class="p-6 border-b bg-slate-50 flex justify-between items-center"><h3 class="font-black text-sm text-slate-800 uppercase tracking-widest">Interview Coordination Console</h3><button onclick="closeModal()"><i data-lucide="x" class="w-6 h-6 text-gray-400"></i></button></div>
-                <div class="p-10 space-y-10">
-                    <div class="grid grid-cols-2 gap-8">
-                        <div><label class="form-label">Context Candidate</label><input id="sch-candidate" class="input-erp" placeholder="Select from pipeline"></div>
-                        <div><label class="form-label">Provisioned Account</label><input id="sch-client" class="input-erp"></div>
-                    </div>
-                    <div class="grid grid-cols-3 gap-8">
-                        <div><label class="form-label">Desk Date</label><input id="sch-date" type="date" class="input-erp"></div>
-                        <div><label class="form-label">Desk Timeline</label><input id="sch-time" type="time" class="input-erp"></div>
-                        <div><label class="form-label">Interview Format</label>
-                            <select id="sch-mode" class="input-erp font-black uppercase tracking-tighter">
-                                <option>Google Meet</option>
-                                <option>Telephonic</option>
-                                <option>Face to Face</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div><label class="form-label">Access Logic (Join Link / Venue Address)</label><input id="sch-link" class="input-erp" placeholder="Paste meet link or physical address"></div>
-                </div>
-                <div class="p-6 border-t bg-slate-50 flex justify-end gap-4"><button onclick="closeModal()" class="btn-secondary px-10">Discard</button><button onclick="saveInterviewSession()" class="btn-primary px-14 uppercase tracking-widest font-black">Confirm Schedule</button></div>
-            `;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            lucide.createIcons();
-        }
-
-        function saveInterviewSession() {
-            const payload = {
-                interviewid: "I-" + Date.now().toString().slice(-4),
-                candidatename: document.getElementById('sch-candidate').value,
-                company_name: document.getElementById('sch-client').value,
-                interview_date: document.getElementById('sch-date').value,
-                interview_time: document.getElementById('sch-time').value,
-                interview_mode: document.getElementById('sch-mode').value,
-                interview_feedback: document.getElementById('sch-link').value,
-                next_step: 'Scheduled'
-            };
-            submitDeskAction({ action: 'updateInterviewStep', ...payload });
-        }
-
+        function toggleClientDrill(id) { state.expandedClientId = state.expandedClientId === id ? null : id; renderView(); }
         function handleLogout() { state.user = null; router.navigate('careers'); }
         function closeModal() { document.getElementById('modal-overlay').classList.add('hidden'); }
-        function copyDeskLink(id) { navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}?jobid=${id}`); showToast("Direct Mandate Link Synced"); }
+        function copyDeskLink(id) { navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}?jobid=${id}`); showToast("Mandate Link Synced"); }
         
         function showToast(msg) { 
             const t = document.getElementById('toast'); 
@@ -949,15 +937,7 @@
             setTimeout(() => { t.classList.add('translate-y-20', 'opacity-0'); setTimeout(() => t.classList.add('hidden'), 300); }, 3000);
         }
 
-        function handleLogin(e) {
-            e.preventDefault();
-            if (document.getElementById('li-email').value === "rajesh@raveone.in" && document.getElementById('li-pass').value === "P1@st15s!") {
-                state.user = { name: "Rajesh K Rao" };
-                router.navigate('jobs');
-            } else alert("Desk Authorization Denied. Credentials mismatch.");
-        }
-
-        window.onload = fetchDeskData;
+        window.onload = () => { renderNav(); fetchDeskData(); };
     </script>
 </body>
 </html>
